@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css">
+		<script src="../jquery-3.3.1.min.js"></script>
+		
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<div class="layui-form-item pane">
+				<div class="layui-form-item">
+					<label class="layui-form-label">中转中心编号</label>
+					<div class="layui-input-block">
+						<input type="text" name="receiveCenterId" required lay-verify="required" placeholder="请输入中转中心编号" autocomplete="off"
+						 class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">到达日期</label>
+					<div class="layui-inline">
+						<input type="text" name="receiveArriveDate" class="layui-input" readonly id="test1" placeholder="请选择到达日期">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">中转单编号</label>
+					<div class="layui-input-block">
+						<input type="text" name="receiveTransferId" required lay-verify="required" placeholder="请输入中转单编号" autocomplete="off"
+						 class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">出发地</label>
+					<div class="layui-input-block">
+						<input type="text" name="receiveDepature" required lay-verify="required" placeholder="请选择出发地" autocomplete="off"
+						 class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">货物到状态</label>
+					<div class="layui-input-block">
+						<select name="receiveArrivateState" lay-verify="">
+							<option value="请选择物品状" ">请选择物品状态</option>
+							<option value=" 完好">完好</option>
+							<option value="遗失">遗失</option>
+							<option value="损坏">损坏</option>
+							<option value="其他">其他</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item">
+
+					<div class="layui-input-block" align="center">
+						<button class="layui-btn" lay-submit lay-filter="formDemo" href="" id="add">确认添加</a></button>
+						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					</div>
+				</div>
+		</form>
+		<script src="../layui.js"></script>
+		<script>
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					layer.msg(JSON.stringify(data.field));
+					$.ajax({
+						type: "POST",
+						url: "http://192.168.2.177:8080/tran/addReceive",
+						data: JSON.stringify(data.field),
+						contentType: "application/json",
+						dataType: 'json',
+						success: function(data) {
+							alert("提交成功!");
+							sessionStorage.setItem("receive", "success"); //向session存入接件成功标志
+							// top.location.href="Receive.html";
+							// target="main";
+							// // window.history.
+						},
+						error: function(ERR) {
+							console.log(ERR);
+							alert("提交失败！！！！");
+						}
+					})
+					return false;
+				});
+			});
+
+			$(document).ready(function() {
+				$("#add").click(function() {
+					// alert("asdasdas");
+					var data = {
+						receiveCenterId: $("receiveCenterId").val(),
+						receiveArriveDate: $("receiveArriveDate").val(),
+						receiveTransferId: $("receiveTransferId").val(),
+						receiveDepature: $("receiveDepature").val(),
+						receiveArrivateState: $("receiveArrivateState").val()
+					}
+				})
+			})
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+				//执行一个laydate实例
+				laydate.render({
+					elem: '#test1' //指定元素
+				});
+			});
+		</script>
+	</body>
+</html>

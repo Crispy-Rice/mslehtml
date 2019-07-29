@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>审批单据</title>
+		<link rel="stylesheet" href="../layui/layui-v2.5.4/layui/css/layui.css" media="all">
+	</head>
+	<body>
+		<div class="layui-btn-group demoTable">
+  <button class="layui-btn" id="getCheckData">获取选中行数据</button>
+  <button class="layui-btn" id="getCheckLength">获取选中数目</button>
+  <button class="layui-btn" id="isAll">验证是否全选</button>
+</div>
+		<table class="layui-hide" id="test"></table>	
+		<script src="../layui/layui-v2.5.4/layui/layui.js" charset="utf-8"></script>
+	<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>	
+		
+		<script type="text/javascript">	
+		layui.use('table', function(){
+    var table = layui.table;
+	
+    table.render({
+    elem: '#test'//把数据渲染到id-test的table里面
+    ,url:'../json/layui.json'//数据接口
+    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+	,toolbar: '#barDemo' //设置表格上的按钮
+	,defaultToolbar: ['filter', 'print', 'exports']//修改表格右边按钮排序
+	,page:true //启动分页
+	/* ,limit: 20 */
+	/* ,limits: [50,100,150] *///每一页多少条
+	/* ,toolbar: true */
+	/* ,toolbar: '#toolbarDemo' */
+	/* ,toolbar: '<div>xxx</div>' */ 
+    ,cols: [[
+	   {type:'checkbox',widht:180}//,LAY_CHECKED:true全部选中复选框
+      ,{field:'id', width:180, title: 'ID', edit:true}//,align:'center'内容居中
+      ,{field:'username', width:180, title: '用户名',edit:true}
+      ,{field:'sex', width:180, title: '性别', edit:true,}//templet:function(obj){return: obj;}}
+      ,{field:'city', width:180, title: '城市'}
+      ,{field:'sign', width:180,title: '签名', width: '30%', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+      ,{field:'experience', width:180,title: '积分', edit:true}
+      ,{field:'score', width:180,title: '评分', edit:true}
+      ,{field:'classify',width:180, title: '职业'}
+      ,{field:'wealth', width:137, title: '财富', edit:true }
+	  ,{ width:180, title: '操作', fixed:"right",toolbar:"#barDemo" }	  
+    ]]
+  });
+  /* var $ = layui.$, active = {
+    getCheckData: function(){ //获取选中数据
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.alert(JSON.stringify(data));
+    }
+    ,getCheckLength: function(){ //获取选中数目
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.msg('选中了：'+ data.length + ' 个');
+    }
+    ,isAll: function(){ //验证是否全选
+      var checkStatus = table.checkStatus('idTest');
+      layer.msg(checkStatus.isAll ? '全选': '未全选')
+    }
+  }; */
+   //得到选中行数据
+  $("#getCheckData").click(function(){
+	 var checkStatus = table.checkStatus('test');
+     layer.alert(JSON.stringify(checkStatus.data)); 
+  })
+  //得到选中的行数
+   $("#getCheckLength").click(function(){
+	 var checkStatus = table.checkStatus('test');
+	 layer.alert(checkStatus.data.length);	  
+  })
+  
+  //判断是否选中
+   $("#isAll").click(function(){
+  	 var checkStatus = table.checkStatus('test');
+	  layer.alert(checkStatus.isAll);
+  }) 
+});
+</script>
+	</body>
+</html>

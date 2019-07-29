@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!-- 车辆信息管理 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css" media="all">
+		<script src="../jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<table class="layui-hide" id="test" lay-filter="test"></table>
+		<script type="text/html" id="toolbarDemo">
+			<div class="demoTable"  style="float:left;>
+		  搜索ID：
+		  <div class="layui-inline"">
+		    <input class="layui-input" name="id" id="demoReload" autocomplete="off" placeholder="请按ID搜索车辆信息">
+		  </div>
+		  <button class="layui-btn" data-type="reload" onclick="select()">搜索</button>
+		</div>
+		
+		 <button data-method="offset" data-type="auto" id="test2" class="layui-btn layui-btn-normal">
+			<i class="layui-icon layui-icon-add-circle-fine"></i>添加车辆</button>
+		<input class="layui-btn" type="submit" value="刷新" id="btn" onclick="shuaxin()">	
+  </div>
+	
+</script>
+
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+		<script src="../layui.js"></script>
+		<script>
+			allUser("http://192.168.2.177:8080/tran/queryAllCars?carHallId=1");
+			//根据接收单id查询
+			var demoReload;
+			function select() {
+				demoReload = $("#demoReload").val();
+				if (demoReload == "") {
+					alert("接收单号不得为空！")
+				} else {
+					var url = "http://192.168.2.177:8080/tran/queryCarById?id=" + demoReload;
+					allUser(url);
+				}
+			
+			}
+			
+			// 刷新
+			function shuaxin() {
+				allUser("http://192.168.2.177:8080/tran/queryAllCars?carHallId=1");
+			}
+			
+			//查询全部
+			function allUser(url) {
+			layui.use(['table', 'layer'], function() {
+				var table = layui.table;
+				table.render({
+					elem: '#test',
+					url: url,
+					toolbar: '#toolbarDemo',
+					title: '用户数据表',
+					cols: [
+						[{
+							type: 'checkbox',
+							fixed: 'left'
+						}, {
+							field: 'carId',
+							align: 'center',
+							title: '车辆ID',
+							fixed: 'left',
+							unresize: true,
+							sort: true
+						}, {
+							field: 'carCarNo',
+							align: 'center',
+							title: '车辆代号',
+							edit: 'text'
+						}, {
+							field: 'carEngineNo',
+							align: 'center',
+							title: '发动机号'
+						}, {
+							field: 'carBaseplateNo',
+							align: 'center',
+							title: '底盘编号'
+						}, {
+							field: 'carNo',
+							align: 'center',
+							title: '车牌号'
+						}, {
+							field: 'carBuyTime',
+							align: 'center',
+							title: '购车时间'
+						}, {
+							field: 'carAge',
+							title: '服役时间(年)',
+							align: 'center'
+						}, {
+							fixed: 'right',
+							title: '操作',
+							toolbar: '#barDemo',
+							align: 'center'
+						}]
+					],
+					page: true
+				});
+				//监听行工具事件
+				table.on('tool(test)', function(obj) {
+					var data = obj.data;
+					//console.log(obj)
+					if (obj.event === 'del') {
+						layer.confirm('确认删除吗？', function(index) {
+							$.ajax({
+								type: 'DELETE',
+								url: "http://192.168.2.177:8080/tran/deleteCar?id=" + obj.data.carId,
+								dataType: "json",
+								success: function(result) {
+									history.go(0);
+									obj.del();
+									layer.close(index);
+								},
+								error: function(error) {
+									console.log(error);
+								}
+							})
+						});
+					} else if (obj.event === 'edit') {
+						$.ajax({
+							type: 'PUT',
+							url: "",
+							data: "JSON.stringify(data.field)",
+							dataType: "json",
+							success: function(result) {
+								alert("update success")
+							},
+							error: function(error) {
+								console.log(error);
+							}
+						})
+					}
+				});
+				
+
+				$('#test2').on('click', function() {
+					layer.open({
+						type: 2,
+						title: '添加车辆',
+						maxmin: true,
+						shadeClose: true, //点击遮罩关闭层
+						area: ['900px', '600px'],
+						content: 'Vehicle-imfo-add.html'
+					});
+				});
+			});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Login</title>
+	<link rel="stylesheet" href="plugins/layui/css/layui.css">
+	<link rel="stylesheet" href="src/css/login.css">
+</head>
+<body>
+<div class="kit-login">
+	<div class="kit-login-bg"></div>
+	<div class="kit-login-wapper">
+		<h2 class="kit-login-slogan">欢迎使用 <br> 纯白物流管理系统后台模板</h2>
+		<div class="kit-login-form">
+			<h4 class="kit-login-title">登录</h4>
+			<form class="layui-form">
+				<div class="kit-login-row">
+					<div class="kit-login-col">
+						<i class="layui-icon">&#xe612;</i>
+						<span class="kit-login-input">
+									<input type="text" id="loginName" name="name" lay-verify="loginName" placeholder="用户名/邮箱/手机号" />
+								</span>
+					</div>
+					<div class="kit-login-col"></div>
+				</div>
+				<div class="kit-login-row">
+					<div class="kit-login-col">
+						<i class="layui-icon">&#xe64c;</i>
+						<span class="kit-login-input">
+									<input type="password" id="password" name="psd" lay-verify="password" placeholder="密码" />
+								</span>
+					</div>
+					<div class="kit-login-col"></div>
+				</div>
+				<div class="kit-login-row">
+					<div class="kit-login-col">
+						<input type="checkbox" name="rememberMe" title="记住帐号" lay-skin="primary">
+					</div>
+				</div>
+				<div class="kit-login-row">
+					<button class="layui-btn kit-login-btn" lay-submit="submit" lay-filter="login_hash">登录</button>
+				</div>
+				<div class="kit-login-row" style="margin-bottom:0;">
+					<a href="javascript:;" style="color: rgb(153, 153, 153); text-decoration: none; font-size: 13px;" id="forgot">忘记密码</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script src="plugins/polyfill.min.js"></script>
+<script src="WEB-INF/jquery/jquery-3.3.1.min.js"></script>
+<script src="plugins/layui/layui.js"></script>
+<script>
+	layui.use(['layer', 'form', 'element', 'table'], function() {
+		var form = layui.form,
+				$ = layui.jquery,
+				layer = layui.layer,
+				elememt = layui.elememt,
+				table = layui.table;
+
+		//设置单个 table 实例的 token
+		table.render({
+			elem: '#xxxx',
+			url: 'http://192.168.2.177:8080/login/login',
+			where: {
+				access_token: layui.data('layuiAdmin').access_token
+			}
+			//,headers: {}
+		});
+		// 验证
+		form.verify({
+			loginName: function(value, item) { //value：表单的值、item：表单的DOM对象
+				if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+					return '用户名不能有特殊字符';
+				}
+				if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+					return '用户名首尾不能出现下划线\'_\'';
+				}
+			},
+			password: [
+				/^[\S]{6,12}$/, '密码必须6到12位，且空格无效'
+			]
+		});
+		$('#forgot').on('click', function() {
+			layer.msg('请联系管理员.');
+		});
+		//监听提交
+		form.on('submit(login_hash)', function(data) {
+			var name=document.getElementById("loginName").value;
+			var psd= document.getElementById("password").value;
+			//layer.msg(JSON.stringify(data.field));
+			setTimeout(function() {
+				$.ajax({
+					type: 'get',
+					url: "http://192.168.2.177:8080/login/login",
+					dataType: "json",
+					data: {'name': name, 'psd': psd},
+					success: function(result) {
+						console.log(result);
+						if(result.data[0]=="总经理"){
+							sessionStorage.setItem("orgazation", result.data[1]);
+							location.href = 'Administrators.html';
+						}
+						if(result.data[0]=="寄件人"){
+							sessionStorage.setItem("orgazation", result.data[1]);
+							location.href = 'Appointment.html';
+						}
+						if(result.data[0]=="营业厅快递员"){
+							sessionStorage.setItem("orgazation", result.data[1]);
+							location.href = 'Courier.html';
+						}
+						if(result.data[0]=="管理员"){
+							sessionStorage.setItem("orgazation", result.data[1]);
+							location.href = 'General manager.html';
+						}
+						if(result.data[0]=="中转中心业务员"){
+							sessionStorage.setItem("orgazation", result.data[1]);
+							location.href = '../../logistics/layui/Transfer.html';
+						}
+						if(result.data[0]=="中转中心仓库管理员"){
+							sessionStorage.setItem("orgazation", result.data[1]);
+							location.href = '../../logistics/layui/Warehouse.html';
+						}
+						if(result.data[0]=="财务人员"){
+							sessionStorage.setItem("orgazation", result.data[1]);
+							location.href = '../../logistics/layui/Finance.html';
+						}
+						if(result.data[0]=="营业厅业务员"){
+							sessionStorage.setItem("orgazation", result.data[1]);
+							location.href = '../../logistics/layui/SalesClerk.html';
+						}
+						if(result.data[0]=="false"){
+
+							layer.msg("账号密码错误，请重试");
+						}
+					},
+					error: function(error) {
+						layer.msg("账号密码错误，请重试");
+					}
+
+				})
+
+			}, 1000);
+
+			return false;
+		});
+	});
+</script>
+</body>
+
+</html>
+

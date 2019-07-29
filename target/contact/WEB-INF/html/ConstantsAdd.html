@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>添加常量</title>
+		<link rel="stylesheet" href="../layui/layui-v2.5.4/layui/css/layui.css">
+		<script src="../layerdate/layDate-v5.0.9/laydate/laydate.js"></script>
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<blockquote class="layui-elem-quote">
+				<div class="layui-form-item ">
+					<label class="layui-form-label">出发地点</label>
+					<div class="layui-input-block">
+						<select name="constantCityStart" lay-verify="required">
+							<option value=""></option>
+							<option value="北京">北京</option>
+							<option value="上海">上海</option>
+							<option value="广州">广州</option>
+							<option value="南京">南京</option>
+							<option value="杭州">杭州</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">到达地点</label>
+					<div class="layui-input-block">
+						<select name="constantCityEnd" lay-verify="required">
+							<option value=""></option>
+							<option value="北京">北京</option>
+							<option value="上海">上海</option>
+							<option value="广州">广州</option>
+							<option value="南京">南京</option>
+							<option value="杭州">杭州</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">距离</label>
+					<div class="layui-input-block">
+						<input type="text" name="constantDistance" required lay-verify="required" placeholder="请输入距离" autocomplete="off"
+						 class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">价格</label>
+					<div class="layui-input-block">
+						<input type="text" name="constantPrice" required lay-verify="required" placeholder="请输入价格" autocomplete="off"
+						 class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">经济时间</label>
+					<div class="layui-input-block">
+						<input type="text" name="constantTimeSubstantial" required lay-verify="required" placeholder="请输入时间" autocomplete="off"
+						 class="layui-input">
+					</div>
+				</div>
+				
+				<div class="layui-form-item">
+					<label class="layui-form-label">标准时间</label>
+					<div class="layui-input-block">
+						<input type="text" name="constantTimePosthaste" required lay-verify="required" placeholder="请输入时间" autocomplete="off"
+						 class="layui-input">
+					</div>
+				</div>
+				
+				<div class="layui-form-item">
+					<label class="layui-form-label">特快时间</label>
+					<div class="layui-input-block">
+						<input type="text" name="constantTimeStandard" required lay-verify="required" placeholder="请输入时间" autocomplete="off"
+						 class="layui-input">
+					</div>
+				</div>
+				
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit lay-filter="formDemo">确认</button>
+						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					</div>
+				</div>
+		</form>
+		<script src="../layui/layui-v2.5.4/layui/layui.js"></script>
+		<script src="../jquery/jquery-3.3.1.min.js"></script>
+		<script>
+			//Demo
+			layui.use(['layer', 'form', 'element'], function() {
+				var form = layui.form,
+					$ = layui.jquery,
+					element = layui.form;
+
+				/* $("#searchBtn").on('click', function() {
+					var demoReload = $('#demoReload');
+					table.reload('demo', {
+						page: {
+							curr: 1 //重新从第 1 页开始
+						},
+						where: {
+							/* constant_city_start:demoReload.val(),
+							constant_city_end:demoReload.val(),
+							constant_distance:demoReload.val(),
+							constant_price:demoReload.val(),
+							constant_time_substantial:demoReload.val(),
+							constant_time_standard:demoReload.val(),
+							constant_time_posthaste:demoReload.val(), */
+						/* },
+						done: function() {
+							element.render('progress');
+						}
+					});
+
+					//添加
+					$("addBtn").click(function() {
+						alert(1)
+					})
+				}); */ 
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					layer.msg(JSON.stringify(data.field));
+					$.ajax({
+						type: "post",
+						url: "http://192.168.2.220:8080/constant/insertConstant",
+						data: JSON.stringify(data.field),
+						contentType: "application/json",
+						dataType: 'json',
+						success: function(data) {
+							alert("提交成功!");
+							sessionStorage.setItem("receive", "success"); //向session存入接件成功标志
+							// top.location.href="Receive.html";
+							// target="main";
+							// // window.history.
+						},
+						error: function(ERR) {
+							console.log(ERR);
+							alert("提交失败！！！！");
+						}
+					})
+					return false;
+				});
+			});
+			$(document).ready(function() {
+				$("#add").click(function() {
+					// alert("asdasdas");
+					var data = {
+						constantCityStart: $("constantCityStart").val(),
+						constantCityEnd: $("constantCityEnd").val(),
+						constantDistance: $("constantDistance").val(),
+						constantPrice: $("constantPrice").val(),
+						constantTimeSubstantial: $("constantTimeSubstantial").val(),
+						constantTimeStandard: $("constantTimeStandard").val(),
+						constantTimePosthaste: $("constantTimePosthaste").val()
+						
+					}
+				})
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!-- 车辆装车 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css" media="all">
+		<script src="../jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<table class="layui-hide" id="test" lay-filter="test"></table>
+		<script type="text/html" id="toolbarDemo">
+			<div class="demoTable"  style="float:left;>
+		  <div class="layui-inline"">
+		    <input class="layui-input" name="id" id="demoReload" autocomplete="off"  placeholder="请按装车单ID搜索">
+		  </div>
+		  <button class="layui-btn" data-type="reload" onclick="select()">搜索</button>
+		</div>
+		
+		 <button data-method="offset" data-type="auto" id="test2" class="layui-btn layui-btn-normal">
+			<i class="layui-icon layui-icon-add-circle-fine"></i>添加装车单</button>
+		<input class="layui-btn" type="submit" value="刷新" id="btn" onclick="shuaxin()">	
+  </div>
+	
+</script>
+
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+		<script src="../layui.js"></script>
+		<script>
+			allUser("http://192.168.2.177:8080/tran/getLoadingListByHallId?id=025000");
+			//根据装车单id查询
+			var demoReload;
+
+			function select() {
+				demoReload = $("#demoReload").val();
+				if (demoReload == "") {
+					alert("装车单号不得为空！")
+				} else {
+					var url = "http://192.168.2.177:8080/tran/getLoadingListById?id=" + demoReload;
+					allUser(url);
+				}
+			}
+			// 刷新
+			function shuaxin() {
+				allUser("http://192.168.2.177:8080/tran/getLoadingListByHallId?id=025000");
+			}
+
+			function allUser(url) {
+				layui.use(['table', 'layer'], function() {
+					var table = layui.table;
+					var layer = layui.layer;
+					var $ = layui.jquery;
+					table.render({
+						elem: '#test',
+						url: url,
+						toolbar: '#toolbarDemo',
+						title: '用户数据表',
+						cols: [
+							[{
+								type: 'checkbox',
+								fixed: 'left'
+							}, {
+								field: 'loadingListId',
+								align: 'center',
+								title: '装车单ID',
+								fixed: 'left',
+								unresize: true,
+								sort: true
+							}, {
+								field: 'loadingListLoadDate',
+								align: 'center',
+								title: '装运日期',
+								edit: 'text'
+							}, {
+								field: 'loadingListHallNo',
+								align: 'center',
+								title: '本营业厅编号',
+								edit: 'text'
+							}, {
+								field: 'loadingListTranNo',
+								align: 'center',
+								title: '汽运编号',
+								edit: 'text'
+							}, {
+								field: 'loadingListDestination',
+								align: 'center',
+								title: '目的地'
+							}, {
+								field: 'loadingListSupervisor',
+								title: '监装员',
+								align: 'center'
+							}, {
+								field: 'loadingListSupercargo',
+								title: '押运员',
+								align: 'center'
+							}, {
+								field: 'loadingListOrderId',
+								title: '条形码',
+								sort: true,
+								align: 'center'
+							}, {
+								field: 'loadingListFee',
+								title: '运费',
+								align: 'center'
+							}, {
+								fixed: 'right',
+								title: '操作',
+								toolbar: '#barDemo',
+								align: 'center'
+							}]
+						],
+						page: true
+					});
+
+					table.on('tool(test)', function(obj) {
+						var data = obj.data;
+						if (obj.event == 'del') {
+							layer.confirm('确认删除吗？', function(index) {
+								$.ajax({
+									type: 'DELETE',
+									url: "http://192.168.2.177:8080/tran/deleteLoadingListById?loadingListId=" + obj.data.loadingListId,
+									dataType: 'json',
+									success: function(result) {
+										history.go(0),
+											obj.del(),
+											layer.close(index);
+									},
+									error: function(error) {
+										console.log(error);
+									}
+								})
+							});
+						}
+					});
+
+					$('#test2').on('click', function() {
+						layer.open({
+							type: 2,
+							title: '添加装车单',
+							maxmin: true,
+							shadeClose: true, //点击遮罩关闭层
+							area: ['800px', '550px'],
+							content: 'Vehicle-add.html'
+						});
+					});
+				});
+			}
+		</script>
+	</body>
+</html>

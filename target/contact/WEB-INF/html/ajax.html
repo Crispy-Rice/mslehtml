@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax练习</title>
+    <script src="../jquery/jquery-1.12.4.min.js"></script>
+    <script>
+        window.onload=function () {
+            $("#btn").click(function () {
+                alert("点击事件");
+                $.ajax({
+                    type:'get',
+                    url:'http://192.168.2.220:8080/account/getAccount',
+                    datatype:'json',
+                    success:function (data) {
+                        console.log(data);
+                        str='';
+                        for (var i=0;i<data.length;i++){
+                            str+='<table>';
+                            str+='<tr>';
+                            str+='<td>'+data[i].accountId+'</td>';
+                            str+='<td>'+data[i].accountName+'</td>';
+                            str+='<td>'+data[i].accountSurplus+'</td>';
+                            str+='</tr>';
+                            str+='</table>';
+
+                        }
+                        $("#mian").append(str);
+                    },
+                    error:function () {
+                        alert("请求失败！");
+                    },
+                })
+            });
+        }
+
+    </script>
+    <style>
+        #mian{
+            width: 500px;
+            height: 500px;
+            margin: auto;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<input type="submit" value="获取数据" id="btn">
+<div id="mian">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- 车辆信息管理 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css" media="all">
+		<script src="../jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<table class="layui-hide" id="test" lay-filter="test"></table>
+		<script type="text/html" id="toolbarDemo">
+			<div class="demoTable" style="float:left;>
+		  <div class=" layui-inline"">
+    <input class="layui-input" name="id" id="demoReload" autocomplete="off" placeholder="请按ID搜索司机信息">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+    <button data-method="offset" data-type="auto" id="test2" class="layui-btn layui-btn-normal">
+        <i class="layui-icon layui-icon-add-circle-fine"></i>添加司机
+    </button>
+	<input class="layui-btn" type="submit" value="刷新" id="btn" onclick="shuaxin()">
+    </div>
+</script>
+
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  
+</script>
+		<script src="../layui.js"></script>
+		<script>
+			allUser();
+
+			function shuaxin() {
+				allUser();
+			}
+
+			function allUser() {
+				layui.use(['table', 'layer'], function() {
+					var table = layui.table;
+					var layer = layui.layer;
+					var $ = layui.jquery;
+					table.render({
+						elem: '#test',
+						url: 'http://192.168.2.177:8080/tran/queryAllDrivers?driverHallId=1',
+						toolbar: '#toolbarDemo',
+						title: '用户数据表',
+						cols: [
+							[{
+								type: 'checkbox',
+								fixed: 'left'
+							}, {
+								field: 'driverId',
+								align: 'center',
+								title: '司机编号',
+								fixed: 'left',
+								unresize: true,
+								sort: true
+							}, {
+								field: 'driverName',
+								align: 'center',
+								title: '姓名',
+								edit: 'text'
+							}, {
+								field: 'driverBirthdate',
+								align: 'center',
+								title: '出生日期'
+							}, {
+								field: 'driverIdNum',
+								title: '身份证号',
+								align: 'center'
+							}, {
+								field: 'driverPhone',
+								title: '手机',
+								align: 'center'
+							}, {
+								field: 'driverSex',
+								title: '性别',
+								sort: true,
+								align: 'center'
+							}, {
+								field: 'driverDue',
+								title: '行驶证期限',
+								align: 'center'
+							}, {
+								fixed: 'right',
+								title: '操作',
+								toolbar: '#barDemo',
+								align: 'center'
+							}]
+						],
+						page: true
+					});
+					//监听行工具事件
+					table.on('tool(test)', function(obj) {
+						var data = obj.data;
+						//console.log(obj)
+						if (obj.event == 'del') {
+							layer.confirm('确认删除吗？', function(index) {
+								$.ajax({
+									type: 'DELETE',
+									url: "http://192.168.2.177:8080/tran/deleteDriver?id=" + obj.data.driverId,
+									dataType: 'json',
+
+									success: function(result) {
+										history.go(0),
+											obj.del(),
+											layer.close(index);
+									},
+									error: function(error) {
+										console.log(error);
+									}
+								})
+							});
+						}
+					});
+
+					$('#test2').on('click', function() {
+						layer.open({
+							type: 2,
+							title: '添加司机',
+							maxmin: true,
+							shadeClose: true, //点击遮罩关闭层
+							area: ['800px', '550px'],
+							content: 'Driver-mng-add.html'
+						});
+					});
+				});
+			}
+		</script>
+	</body>
+</html>

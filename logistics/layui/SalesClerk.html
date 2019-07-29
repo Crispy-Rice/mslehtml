@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- 营业厅业务员 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>纯白物流管理系统</title>
+		<link rel="stylesheet" href="css/layui.css" media="all">
+	</head>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="layui-logo" style="color: #F8F8F8;">纯白物流管理系统</div>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							<img src="images/img/1.jpg" class="layui-nav-img">
+							营业厅业务员
+						</a>
+						<dl class="layui-nav-child">
+							<dd><a href="">基本资料</a></dd>
+							<dd><a href="">安全设置</a></dd>
+							<dd><a href="	">退出</a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+
+			<div class="layui-side layui-bg-black">
+				<div class="layui-side-scroll">
+					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						<li class="layui-nav-item layui-nav-itemed">
+							<a target="main" href="html/Vehicle-mng.html">车辆装车</a>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" target="main" href="html/Good-mng.html">接件管理</a>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" target="main" href="html/Send-mng.html">派件管理</a>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" target="main" href="html/RecordCollection.html">记录收款</a>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" target="main" href="html/Vehicle-imfo.html">车辆信息管理</a>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" target="main" href="html/Driver-mng.html">司机信息管理</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="layui-body" style="display: flex;">
+				<!-- 内容主体区域 -->
+				<iframe name="main" width="" height="" style="flex: 1;"></iframe>
+				<div class="layui-footer">
+					<!-- 底部固定区域 -->
+					2019 © 纯白物流 当前版本：v1.0.1
+				</div>
+			</div>
+		</div>
+		<script src="layui.js"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use('element', function() {
+				var element = layui.element;
+			});
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+				laydate.render({
+					elem: '#test1'
+				});
+			});
+		</script>
+	</body>
+</html>

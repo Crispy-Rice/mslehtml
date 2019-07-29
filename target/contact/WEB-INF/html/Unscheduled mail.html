@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>非预约寄件</title>
+		<link rel="stylesheet" href="../layui/layui-v2.5.4/layui/css/layui.css">
+		<script src="../layerdate/layDate-v5.0.9/laydate/laydate.js"></script>
+		<script src="../layui/layui-v2.5.4/layui/layui.js"></script>
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<blockquote class="layui-elem-quote">
+			<div class="layui-form-item">
+				<label class="layui-form-label">寄件人姓名</label>
+				<div class="layui-input-block">
+					<input type="text" name="orderSenderName" required lay-verify="order_sender_name" placeholder="请填写姓名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+					<!-- <input type="text" name="title" required lay-verify="required" placeholder="住址" autocomplete="off" class="layui-input"> -->
+					<div class="layui-form-item">
+						<label class="layui-form-label">寄件人单位</label>
+						<div class="layui-input-block">
+					<input type="text" name="orderSenderUnit" required lay-verify="order_sender_unit" placeholder="请填写单位" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">寄件人电话</label>
+						<div class="layui-input-block">
+					<input type="text" name="orderSenderPhone" required lay-verify="order_sender_fixphone" placeholder="请填写电话" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">寄件人号码</label>
+						<div class="layui-input-block">
+					<input type="text" name="orderSenderFixphone" required lay-verify="order_sender_phone" placeholder="请填写手机号" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">收件人姓名</label>
+				<div class="layui-input-block">
+					<input type="text" name="orderRecipientsName" required lay-verify="order_recipients_name" placeholder="请填写姓名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+					
+					<!-- <input type="text" name="title" required lay-verify="required" placeholder="住址" autocomplete="off" class="layui-input"> -->
+					<div class="layui-form-item">
+						<label class="layui-form-label">收件人单位</label>
+						<div class="layui-input-block">
+					<input type="text" name="orderRecipientsUnit" required lay-verify="order_recipients_unit" placeholder="请填写单位" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">收件人电话</label>
+						<div class="layui-input-block">
+					<input type="text" name="orderRecipientsPhone" required lay-verify="order_recipients_fixphone" placeholder="请填写电话" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">收件人号码</label>
+						<div class="layui-input-block">
+					<input type="text" name="orderRecipientsFixphone" required lay-verify="order_recipients_phone" placeholder="请填写手机号" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				        <label class="layui-form-label">货物数量</label>
+				
+				        <div class="layui-input-block">
+				            <input type="number" name="orderCargoNum" required lay-verify="order_cargo_num" placeholder="请填写货物数量" autocomplete="off" class="layui-input">
+				        
+				    </div>
+				</div>	
+				<div class="layui-form-item">
+					<label class="layui-form-label">货物重量</label>
+					<div class="layui-input-block">
+						<input type="text" name="orderCargoWeight" required lay-verify="order_cargo_weight" placeholder="请填写货物重量 kg" autocomplete="off" class="layui-input">
+					</div>	
+				</div>	
+				
+				
+				<div class="layui-form-item">
+					<label class="layui-form-label">货物体积</label>
+					<div class="layui-input-block">
+						<input type="text" name="orderCargoBulk" required lay-verify="order_cargo_bulk" placeholder="请填写货物体积 立方米" autocomplete="off" class="layui-input">
+					</div>	
+				</div>
+				
+				<div class="layui-form-item">
+					<label class="layui-form-label">内件品名</label>
+					<div class="layui-input-block">
+						<input type="text" name="orderCargoKind" required lay-verify="order_cargo_kind" placeholder="请填写内件品名" autocomplete="off" class="layui-input">
+					</div>	
+				</div>
+					
+			<div class="layui-form-item">
+				<label class="layui-form-label">包装类型</label>
+				<div class="layui-input-block">
+					<select name="city" lay-verify="">
+						<option value=""></option>
+						<option value="orderPackagingPaperquantity">纸箱</option>
+						<option value="orderPackagingWoodenquantity">木箱</option>
+						<option value="orderPackagingBagquantity">快递袋</option>
+						<!-- <option value="5">其它</option> -->
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">快递类型</label>
+				<div class="layui-input-block">
+					<select name="city" lay-verify="">
+						<option value=""></option>
+						<option value="constantTimeSubstantial">经济快递</option>
+						<option value="constantTimeStandard">标准快递</option>
+						<option value="constantTimePosthaste">特快</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item ">
+				<label class="layui-form-label">出发地点</label>
+				<div class="layui-input-block">
+					<select name="city" lay-verify="required">
+						<option value=""></option>
+						<option value="南京">南京</option>
+						<option value="北京">北京</option>
+						<option value="上海">上海</option>
+						<option value="广州">广州</option>
+						<option value="广西">广西</option>
+						<option value="贵州">贵州</option>
+						<option value="成都">成都</option>
+						<option value="苏州">苏州</option>
+						<option value="东北">东北</option>
+						<option value="山西">山西</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">到达地点</label>
+				<div class="layui-input-block">
+					<select name="city" lay-verify="required">
+						<option value=""></option>
+						<option value="南京">南京</option>
+						<option value="北京">北京</option>
+						<option value="上海">上海</option>
+						<option value="广州">广州</option>
+						<option value="广西">广西</option>
+						<option value="贵州">贵州</option>
+						<option value="成都">成都</option>
+						<option value="苏州">苏州</option>
+						<option value="东北">东北</option>
+						<option value="山西">山西</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit lay-filter="formDemo">确认</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+				</blockquote>
+			</div>
+		</form>
+		<script src ="../jquery/jquery-3.3.1.min.js"></script>
+		<script>
+			//Demo
+			layui.use(['layer','form','element'], function() {
+				var form = layui.form,
+				$ = layui.jquery,
+				element = layui.form;
+				// 验证	
+						form.verify({
+				  order_sender_name: function(value, item){ //value：表单的值、item：表单的DOM对象
+				    if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+				      return '用户名不能有特殊字符';
+				    }
+				    if(/(^\_)|(\__)|(\_+$)/.test(value)){
+				      return '用户名首尾不能出现下划线\'_\'';
+				    }
+				  } 
+				  ,password: [
+				    /^[\S]{6,12}$/
+				    ,'密码必须6到12位，且空格无效'
+				  ] 
+				}); 
+				/*order_recipients_fixphone: [
+									  /^1[3|4|5|7|8]\d{9}$/, '手机必须11位，只能是数字！']*/
+				
+				/* this.config = {
+                verify: {
+                    required: [/[\S]+/, "必填项不能为空"],
+                    order_sender_phone: [/(^$)|^1\d{10}$/, "请输入正确的手机号"],
+                    email: [/(^$)|^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/, "邮箱格式不正确"],
+                    url: [/(^$)|(^#)|(^http(s*):\/\/[^\s]+\.[^\s]+)/, "链接格式不正确"],
+                    number: [/(^$)|^\d+$/,'只能填写数字'],
+                    date: [/(^$)|^(\d{4})[-\/](\d{1}|0\d{1}|1[0-2])([-\/](\d{1}|0\d{1}|[1-2][0-9]|3[0-1]))*$/, "日期格式不正确"],
+                    identity: [/(^$)|(^\d{15}$)|(^\d{17}(x|X|\d)$)/, "请输入正确的身份证号"]
+                }
+} */
+
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+						layer.msg(JSON.stringify(data.field));
+						$.ajax({
+							type: "post",
+							url: "http://192.168.2.220:8080/order/addOrder",
+							data: JSON.stringify(data.field),
+							contentType: "application/json",
+							dataType: 'json',
+							success: function(data) {
+								alert("提交成功!");
+								sessionStorage.setItem("receive", "success"); //向session存入接件成功标志
+								// top.location.href="Receive.html";
+								// target="main";
+								// // window.history.
+							},
+							error: function(ERR) {
+								console.log(ERR);
+								alert("提交失败！！！！");
+							}
+						})
+						return false;
+					});
+				});
+				$(document).ready(function() {
+					$("#add").click(function() {
+						// alert("asdasdas");
+						var data = {
+							orderSenderName: $("orderSenderName").val(),
+							orderSenderUnit: $("orderSenderUnit").val(),
+							orderSenderPhone: $("orderSenderPhone").val(),
+							orderSenderFixphone: $("orderSenderFixphone").val(),
+							orderRecipientsName: $("orderRecipientsName").val(),
+							orderRecipientsUnit: $("orderRecipientsUnit").val(),
+							orderRecipientsPhone: $("orderRecipientsPhone").val(),
+							orderRecipientsFixphone: $("orderRecipientsFixphone").val(),
+							orderCargoNum: $("orderCargoNum").val(),
+							orderCargoWeight: $("orderCargoWeight").val(),
+							orderCargoBulk: $("orderCargoBulk").val(),
+							orderCargoKind: $("orderCargoKind").val(),
+							orderPackagingPaperquantity: $("orderPackagingPaperquantity").val(),
+							orderPackagingWoodenquantity: $("orderPackagingWoodenquantity").val(),
+							orderPackagingBagquantity: $("orderPackagingBagquantity").val(),
+							constantTimeSubstantial: $("constantTimeSubstantial").val(),
+							constantTimeStandard: $("constantTimeStandard").val(),
+							constantTimePosthaste: $("constantTimePosthaste").val(),
+							orderCityStart: $("orderCityStart").val(),
+							orderCityEnd: $("orderCityEnd").val(),
+							orderSenderServicehall: $("orderSenderServicehall").val(),
+							orderRecipientsServicehall: $("orderRecipientsServicehall").val()
+						}
+					})
+				})
+				layui.use('laydate', function() {
+					var laydate = layui.laydate;
+					//执行一个laydate实例
+					laydate.render({
+						elem: '#test1' //指定元素
+					});
+				});
+		</script>
+	</body>
+</html>

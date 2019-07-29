@@ -1,0 +1,83 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 1000,
+	"data": [{
+		"id": 10000,
+		"sex": "寄件单",
+		"sign": "2019/5/20",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10001,
+		"username": "001",
+		"sex": "装车单",
+		"city": "草稿",
+		"sign": "2019/5/20",
+		"classify": "退回",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10002,
+		"username": "002",
+		"sex": "营业厅到达单",
+		"city": "提交",
+		"sign": "2019/5/20",
+		"classify": "通过",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10003,
+		"username": "003",
+		"sex": "收款单",
+		"city": "草稿",
+		"sign": "2019/5/20",
+		"classify": "退回",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10004,
+		"username": "004",
+		"sex": "派件单",
+		"city": "提交",
+		"sign": "2019/5/20",
+		"classify": "通过",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10005,
+		"username": "005",
+		"sex": "中转中心到达单",
+		"city": "审核",
+		"sign": "2019/5/20",
+		"classify": "通过",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10006,
+		"username": "006",
+		"sex": "入库单",
+		"city": "提交",
+		"sign": "2019/5/20",
+		"classify": "通过",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10007,
+		"username": "007",
+		"sex": "中转单",
+		"city": "提交",
+		"sign": "2019/5/20",
+		"classify": "通过",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10008,
+		"username": "008",
+		"sex": "出库单",
+		"city": "提交",
+		"sign": "2019/5/20",
+		"classify": "通过",
+		"Annotation":"信息不全"
+	}, {
+		"id": 10009,
+		"username": "009",
+		"sex": "付款单",
+		"city": "草稿",
+		"sign": "2019/5/20",
+		"classify": "退回",
+		"Annotation":"信息不全"
+	}]
+}

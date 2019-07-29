@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>用户展示</title>
+ <link rel="stylesheet" type="text/css" href="../layui/layui-v2.5.4/layui/css/layui.css">
+<script type="text/javascript" src="../layui/layui-v2.5.4/layui/layui.js"></script>
+<script type="text/javascript" src="../layer/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="../layerdate/layDate-v5.0.9/laydate/laydate.js"></script>
+<link rel="stylesheet" type="text/css" href="../layer/layer-v3.1.1/layer/mobile/need/layer.css">
+<script type="text/javascript" src="../jquery/jquery-3.3.1.min.js"></script>
+  <style>
+    body{margin: 10px;}
+    .demo-carousel{height: 200px; line-height: 200px; text-align: center;}
+  </style>
+</head>
+<body>
+ 
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+ 
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+ 
+<div class="layui-tab layui-tab-brief" lay-filter="demo">
+
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">
+    
+      <div class="layui-carousel" id="test1">
+      </div>
+    </div>
+    <div class="layui-tab-item">
+      <div id="laydateDemo"></div>
+    </div>
+    <div class="layui-tab-item">
+      <div id="pageDemo"></div>
+    </div>
+ 
+    <div class="layui-tab-item">
+      <div id="sliderDemo" style="margin: 50px 20px;"></div>
+    </div>
+  </div>
+</div>
+<script>
+layui.config({
+  version: '1545041465480' //为了更新 js 缓存，可忽略
+});
+ 
+layui.use([ 'laypage', 'layer', 'table',   'element', 'slider'], function(){
+  var laypage = layui.laypage //分页
+  ,layer = layui.layer //弹层
+  ,table = layui.table //表格
+  ,element = layui.element //元素操作
+  
+  //监听Tab切换
+  element.on('tab(demo)', function(data){
+    layer.tips('切换了 '+ data.index +'：'+ this.innerHTML, this, {
+      tips: 1
+    });
+  });
+  
+  //执行一个 table 实例
+  table.render({
+    elem: '#demo'
+    ,url: 'showUser' //数据接口
+    ,title: '用户表'
+    ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+    	      layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+    	      //,curr: 5 //设定初始在第 5 页
+    	      ,limit:5 //一页显示多少条
+    	      ,limits:[5,10,15]//每页条数的选择项
+    	      ,groups: 3 //只显示 3个连续页码
+    	      ,first: "首页" //不显示首页
+    	      ,last: "尾页" //不显示尾页
+    	      
+    	    }
+    ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+    ,cols: [[ //表头
+      {type: 'checkbox', fixed: 'left'}
+      ,{field: 'id', title: 'ID', width:50, sort: true}
+      ,{field: 'username', title: '用户名', width:80}
+      ,{field: 'realname', title: '真实姓名', width: 100}
+      ,{field:'sex', title: '性别', width: 60
+          ,templet: function(d){
+        	  return (d.sex == "1") ? "男": "女";
+          }
+        }
+
+      ,{field: 'dept', title: '所在部门', width: 100}
+      ,{field: 'role', title: '当前职位', width:100} 
+      ,{field: 'phone', title: '电话', width: 120}
+      ,{field: 'email', title: '邮箱', width: 150}
+      ,{field: 'ctime', title: '入职时间', width: 105, sort: true, totalRow: true}
+      ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+    ]]
+  });
+  
+  //监听头工具栏事件
+  table.on('toolbar(test)', function(obj){
+    var checkStatus = table.checkStatus(obj.config.id)
+    ,data = checkStatus.data; //获取选中的数据
+    switch(obj.event){
+      case 'add':
+        //layer.msg('添加');
+        
+ 
+    		//layer.msg("123");
+    		//定义一个空对象，作为open函数的参数
+    		var options={};
+    		options.type=1;
+    		options.title="添加用户";
+    		options.content=$('#userIfor');
+    		options.btn=[ '添加','关闭'];
+    		options.area= ['350px', '300px'];
+    		
+
+    		//自动获取select中的值
+    		options.success=function(){
+    			//后台返回部门的deptname 动态加载
+    			$.post('/tp5/index.php/admin/admin/getSelectInfor',{}
+    			,function(res){
+    				//先清空 
+    				var role = document.getElementById("termId2");
+    				var opts2 = role.getElementsByTagName("option");
+    				for(var x=opts2.length-1;x>0;x--){
+    				      role.removeChild(opts[x]);
+    				        }
+
+    				var opt = "<option value='' selected = \'selected\'>--请选择--</option>";
+    				$("select[name=termId]").append(opt);
+    				for(var i=0; i<res.list.length; i++){
+    				var option="<option value=\""+res.list[i].termId+"\"";
+    				option += ">"+res.list[i].deptname+"</option>"; //动态添加数据
+    				$("select[name=termId]").append(option);
+    				}
+    				
+    				$("select[name=termId2]").append(opt);
+    				for(var i=0; i<res.list2.length; i++){
+    				var option2="<option value=\""+res.list2[i].termId2+"\"";
+    				option2 += ">"+res.list2[i].role_name+"</option>"; //动态添加数据
+    				$("select[name=termId2]").append(option2);
+    				}
+    				
+    				
+    				 
+
+    			},'json');
+    		
+    		}
+    		//用户添加
+    		options.yes=function(){
+    		  $.post('/tp5/index.php/admin/admin/addUser',{
+    			  username:$(" input[ name='username' ] ").val(),
+    			  relname:$(" input[ name='relname' ] ").val(),
+    			  password:$(" input[ name='password' ] ").val(),
+    			  sex:$("input[name='sex']:checked").val(),
+    			  dept:$('#termId option:selected').text(),//获取选中的文本值 val() 是value
+    			  role:$('#termId2 option:selected').text(),
+    			  phone:$(" input[ name='phone' ] ").val(),
+    			  email:$(" input[ name='email' ] ").val(),
+    			  ctime:$(" input[ name='time' ] ").val(),
+
+    		  },function(data){
+    			  if(data.error){
+    				  layer.alert(data.error);
+    				  return;
+    				  }
+    			  layer.alert(data.yes);
+    			  layer.close(index);
+    			//当前页的刷新
+    			  $(".layui-laypage-btn")[0].click(); 
+    		  },'json');
+    		}
+    		
+    		var index=layer.open(options);
+    		
+    		
+        
+      break;
+      case 'update':
+        if(data.length === 0){
+          layer.msg('请选择一行');
+        } else if(data.length > 1){
+          layer.msg('只能同时编辑一个');
+        } else {
+          layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+        }
+      break;
+      case 'delete':
+        if(data.length === 0){
+          layer.msg('请选择一行');
+        } else {
+          layer.msg('删除');
+        }
+      break;
+    };
+  });
+});
+</script>
+
+	<!--个人信息  -->
+	<div id="userIfor" style="display:none">
+	<div class="layui-form-item" lay-filter="boardFilter">
+    <label class="layui-form-label">用户名：</label>
+    <div class="layui-input-block">
+      <input style="width:200px;" type="text" name="username" required  lay-verify="required"  autocomplete="off" class="layui-input">
+    </div>
+     </div>
+     
+     <div class="layui-form-item">
+    <label class="layui-form-label">真实姓名：</label>
+    <div class="layui-input-block">
+      <input style="width:200px;" type="text" name="relname" required  lay-verify="required"  autocomplete="off" class="layui-input">
+    </div>
+     </div>
+     
+      <div class="layui-form-item">
+    <label class="layui-form-label">密码(*)：</label>
+    <div class="layui-input-inline">
+      <input style="width:200px;" type="password" name="password" required lay-verify="required"  autocomplete="off" class="layui-input" >
+    </div>
+  </div>
+  
+   <div class="layui-form-item">
+    <label class="layui-form-label">性别：</label>
+    <div class="layui-input-block" style="margin-top:2px;">
+      <input type="radio" name="sex" value=1 title="男">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="radio" name="sex" value=0 title="女" checked>女
+    </div>
+  </div>
+
+  
+   <div class="layui-form-item">
+    <label class="layui-form-label">所在部门：</label>
+    <div class="layui-input-block">
+      <select name="termId" id="termId" lay-verify="required">
+
+      </select>
+    </div>
+  </div>
+     
+   <div class="layui-form-item">
+    <label class="layui-form-label">当前职位：</label>
+    <div class="layui-input-block">
+      <select name="termId2" id="termId2" lay-verify="required2">
+
+      </select>
+    </div>
+  </div>
+     
+     <div class="layui-form-item">
+    <label class="layui-form-label">联系方式：</label>
+    <div class="layui-input-block">
+      <input style="width:200px;" type="text" name="phone" required  lay-verify="required"  autocomplete="off" class="layui-input">
+    </div>
+     </div>
+      <div class="layui-form-item">
+    <label class="layui-form-label">邮箱：</label>
+    <div class="layui-input-block">
+      <input style="width:200px;" type="text" name="email" required  lay-verify="required"  autocomplete="off" class="layui-input">
+    </div>
+     </div>
+     
+     <div class="layui-form-item ">
+    <label class="layui-form-label">就职日期：</label>
+    <div class="layui-input-block">
+       <input style="width:200px;" id="time" type="text" name="time" required  lay-verify="required" placeholder="请选择日期" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+	
+</div>
+<script>
+
+
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#time' //指定元素
+  });
+});
+</script>
+</body>
+</html>   

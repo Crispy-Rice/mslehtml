@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css">
+		<script src="../jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<div class="layui-form-item pane">
+				<div class="layui-form-item pane" >
+					<div class="layui-form-item">
+						<label class="layui-form-label">装运日期</label>
+						<div class="layui-inline" > 
+						  <input type="text" class="layui-input" readonly id="test1" placeholder="请选择装运日期" name="loadingListLoadDate">
+						</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">  营业厅编号</label>
+							<div class="layui-input-block">
+								<input type="text" name="loadingListHallNo" required lay-verify="required" placeholder="请输入本营业厅编号" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">汽运编号</label>
+							<div class="layui-input-block">
+								<input type="text" name="loadingListTranNo" required lay-verify="required" placeholder="请输入汽运编号" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">目的地</label>
+					<div class="layui-input-block">
+						<input type="text" name="loadingListDestination" required lay-verify="required" placeholder="请输入目的地" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">监装员</label>
+					<div class="layui-input-block">
+						<input type="text" name="loadingListSupervisor" required lay-verify="required" placeholder="请输入监装员姓名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">押运员</label>
+					<div class="layui-input-block">
+						<input type="text" name="loadingListSupercargo" required lay-verify="required" placeholder="请输入押运员姓名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">条形码</label>
+					<div class="layui-input-block">
+						<input type="text" name="loadingListOrderId" required lay-verify="required" placeholder="请输入条形码"  autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">运费</label>
+					<div class="layui-input-block">
+						<input type="text" name="loadingListFee" required lay-verify="required" placeholder="请输入运费"  autocomplete="off" class="layui-input">
+					</div>
+				</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block" align="center">
+			<button class="layui-btn" lay-submit lay-filter="formDemo" href=""
+			>确认添加</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+				</div>
+			</div>
+		</form>
+<script src="../layui.js"></script>
+		<script>
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					layer.msg(JSON.stringify(data.field));
+					$.ajax({
+						type: "POST",
+						url: "http://192.168.2.177:8080/tran/addLoadingList",
+						data: JSON.stringify(data.field),
+						contentType: "application/json",
+						dataType: 'json',
+						success: function(data) {
+							alert("提交成功!");
+							sessionStorage.setItem("receive", "success");
+						},
+						error: function(ERR) {
+							console.log(ERR);
+							alert("提交失败！！！！");
+						}
+					})
+					return false;
+				});
+			});
+			$(document).ready(function() {
+				$("#add").click(function() {
+					
+					var data = {
+						loadingListLoadDate: $("loadingListLoadDate").val(),
+						loadingListHallNo: $("loadingListHallNo").val(),
+						loadingListTranNo: $("loadingListTranNo").val(),
+						loadingListDestination: $("loadingListDestination").val(),
+						loadingListSupervisor: $("loadingListSupervisor").val(),
+						loadingListSupercargo: $("loadingListSupercargo").val(),
+						loadingListOrderId: $("loadingListOrderId").val(),
+						loadingListFee: $("loadingListFee").val()
+					}
+				})
+			})
+			
+			layui.use('laydate', function(){
+			  var laydate = layui.laydate;
+			  
+			  //执行一个laydate实例
+			  laydate.render({
+			    elem: '#test1' //指定元素
+			  });
+			});
+		</script>
+	</body>
+</html>

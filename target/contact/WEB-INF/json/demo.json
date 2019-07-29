@@ -1,0 +1,63 @@
+{
+  "code": 0
+  ,"msg": ""
+  ,"count": 3000000
+  ,"data": [{
+     "staff_strategy_id": "1"
+	,"staff_strategy_position":"快递员"
+	,"staff_strategy_rate":"5000"
+    ,"staff_strategy_metering": "100"
+    ,"staff_strategy_monthly": "3000"
+    ,"staff_strategy_time": "2016-10-14 13:14:12"
+  }, {
+     "staff_strategy_id": "2"
+    ,"staff_strategy_position":"快递员"
+    ,"staff_strategy_rate":"5000"
+    ,"staff_strategy_metering": "100"
+    ,"staff_strategy_monthly": "3000"
+    ,"staff_strategy_time": "2016-10-14 13:14:12"
+    ,"LAY_CHECKED": true
+  }, {
+     "staff_strategy_id": "3"
+    ,"staff_strategy_position":"快递员"
+    ,"staff_strategy_rate":"5000"
+    ,"staff_strategy_metering": "100"
+    ,"staff_strategy_monthly": "3000"
+    ,"staff_strategy_time": "2016-10-14 13:14:12"
+  }, {
+     "staff_strategy_id": "4"
+    ,"staff_strategy_position":"快递员"
+    ,"staff_strategy_rate":"5000"
+    ,"staff_strategy_metering": "100"
+    ,"staff_strategy_monthly": "3000"
+    ,"staff_strategy_time": "2016-10-14 13:14:12"
+  }, {
+     "staff_strategy_id": "5"
+    ,"staff_strategy_position":"快递员"
+    ,"staff_strategy_rate":"5000"
+    ,"staff_strategy_metering": "100"
+    ,"staff_strategy_monthly": "3000"
+    ,"staff_strategy_time": "2016-10-14 13:14:12"
+  }, {
+     "staff_strategy_id": "6"
+    ,"staff_strategy_position":"快递员"
+    ,"staff_strategy_rate":"5000"
+    ,"staff_strategy_metering": "100"
+    ,"staff_strategy_monthly": "3000"
+    ,"staff_strategy_time": "2016-10-14 13:14:12"
+  }, {
+     "staff_strategy_id": "7"
+    ,"staff_strategy_position":"快递员"
+    ,"staff_strategy_rate":"5000"
+    ,"staff_strategy_metering": "100"
+    ,"staff_strategy_monthly": "3000"
+    ,"staff_strategy_time": "2016-10-14 13:14:12"
+  }, {
+     "staff_strategy_id": "8"
+    ,"staff_strategy_position":"快递员"
+    ,"staff_strategy_rate":"5000"
+    ,"staff_strategy_metering": "100"
+    ,"staff_strategy_monthly": "3000"
+    ,"staff_strategy_time": "2016-10-14 13:14:12"
+  }]
+}  

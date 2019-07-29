@@ -1,0 +1,162 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 1000,
+	"data": [
+		{
+			"organization_id":"1",
+			"organization_name":"财务部",
+			"organization_city":"南京",
+			"organization_type":"南京财务部",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}
+			]
+		},
+		{
+			"organization_id":"2",
+			"organization_name":"财务部",
+			"organization_city":"南京",
+			"organization_type":"南京财务部",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		},
+		{
+			"organization_id":"3",
+			"organization_name":"财务部",
+			"organization_city":"南京",
+			"organization_type":"南京财务部",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}
+			]
+		},
+		{
+			"organization_id":"4",
+			"organization_name":"高管层",
+			"organization_city":"南京",
+			"organization_type":"南京高管层",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		},
+		{
+			"organization_id":"5",
+			"organization_name":"高管层",
+			"organization_city":"南京",
+			"organization_type":"南京高管层",
+			
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		},
+		{
+			"organization_id":"6",
+			"organization_name":"营业厅",
+			"organization_city":"南京",
+			"organization_type":"南京营业厅",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		},
+		{
+			
+				"organization_id":"6",
+				"organization_name":"财务部",
+				"organization_city":"南京",
+				"organization_type":"南京财务部",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}
+			]
+		},
+		{
+			
+				"organization_id":"7",
+				"organization_name":"中转部",
+				"organization_city":"南京",
+				"organization_type":"南京中转部",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,231 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 1000,
+	"data": [
+		{
+			"staff_id": "1",
+			"staff_name": "张三",
+			"staff_password": "123",
+			"staff_gender": "男",
+			"staff_age": "18",
+			"staff_phone": "12345678998",
+			"staff_organization": "营业厅",
+			"staff_responsibility":"送快递",
+			"staff_position": "总经理",
+			"staff_strategy_rate": "7000",
+			"staff_strategy_monthly": "2000",
+			"staff_strategy_metering": "100",
+			"staff_status": "1",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}
+			]
+		},
+		{
+			"staff_id": "1",
+			"staff_name": "张三",
+			"staff_password": "123",
+			"staff_gender": "男",
+			"staff_age": "18",
+			"staff_phone": "12345678998",
+			"staff_organization": "营业厅",
+			"staff_responsibility":"送快递",
+			"staff_position": "总经理",
+			"staff_strategy_rate": "7000",
+			"staff_strategy_monthly": "2000",
+			"staff_strategy_metering": "100",
+			"staff_status": "1",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		},
+		{
+			"staff_id": "1",
+			"staff_name": "张三",
+			"staff_password": "123",
+			"staff_gender": "男",
+			"staff_age": "18",
+			"staff_phone": "12345678998",
+			"staff_organization": "营业厅",
+			"staff_responsibility":"送快递",
+			"staff_position": "总经理",
+			"staff_strategy_rate": "7000",
+			"staff_strategy_monthly": "2000",
+			"staff_strategy_metering": "100",
+			"staff_status": "1",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}
+			]
+		},
+		{
+			"staff_id": "1",
+			"staff_name": "张三",
+			"staff_password": "123",
+			"staff_gender": "男",
+			"staff_age": "18",
+			"staff_phone": "12345678998",
+			"staff_organization": "营业厅",
+			"staff_responsibility":"送快递",
+			"staff_position": "总经理",
+			"staff_strategy_rate": "7000",
+			"staff_strategy_monthly": "2000",
+			"staff_strategy_metering": "100",
+			"staff_status": "1",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		},
+		{
+			"staff_id": "1",
+			"staff_name": "张三",
+			"staff_password": "123",
+			"staff_gender": "男",
+			"staff_age": "18",
+			"staff_phone": "12345678998",
+			"staff_organization": "营业厅",
+			"staff_responsibility":"送快递",
+			"staff_position": "总经理",
+			"staff_strategy_rate": "7000",
+			"staff_strategy_monthly": "2000",
+			"staff_strategy_metering": "100",
+			"staff_status": "0",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		},
+		{
+			"staff_id": "1",
+			"staff_name": "张三",
+			"staff_password": "123",
+			"staff_gender": "男",
+			"staff_age": "18",
+			"staff_phone": "12345678998",
+			"staff_organization": "营业厅",
+			"staff_responsibility":"送快递",
+			"staff_position": "总经理",
+			"staff_strategy_rate": "7000",
+			"staff_strategy_monthly": "2000",
+			"staff_strategy_metering": "100",
+			"staff_status": "0",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		},
+		{
+			"staff_id": "1",
+			"staff_name": "张三",
+			"staff_password": "123",
+			"staff_gender": "男",
+			"staff_age": "18",
+			"staff_phone": "12345678998",
+			"staff_organization": "营业厅",
+			"staff_responsibility":"送快递",
+			"staff_position": "总经理",
+			"staff_strategy_rate": "7000",
+			"staff_strategy_monthly": "2000",
+			"staff_strategy_metering": "100",
+			"staff_status": "0",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}
+			]
+		},
+		{
+			"staff_id": "1",
+			"staff_name": "张三",
+			"staff_password": "123",
+			"staff_gender": "男",
+			"staff_age": "18",
+			"staff_phone": "12345678998",
+			"staff_organization": "营业厅",
+			"staff_responsibility":"送快递",
+			"staff_position": "总经理",
+			"staff_strategy_rate": "7000",
+			"staff_strategy_monthly": "2000",
+			"staff_strategy_metering": "100",
+			"staff_status": "0",
+			"users": [
+				{
+					"id": "110",
+					"name": "kd",
+					"img": "../../img/1.jpg"
+				}, {
+					"id": "120",
+					"name": "ke",
+					"img": "../../img/2.jpg"
+				}, {
+					"id": "119",
+					"name": "ks",
+					"img": "../../img/3.jpg"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,116 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 1000,
+	"data": [{
+		"id": 10000,
+		"username": "000",
+		"sex": "寄件单",
+		"city": "草稿",
+		"sign": "2019/5/20",
+		"experience": 875,
+		"logins": 24,
+		/* "wealth": 82830700,
+		"classify": "作家",
+		"score": 57 */
+	}, {
+		"id": 10001,
+		"username": "001",
+		"sex": "装车单",
+		"city": "草稿",
+		"sign": "2019/5/20",
+		"experience": 884,
+		"logins": 58,
+		/* "wealth": 64928690,
+		"classify": "词人",
+		"score": 27 */
+	}, {
+		"id": 10002,
+		"username": "002",
+		"sex": "营业厅到达单",
+		"city": "审批",
+		"sign": "2019/5/20",
+		"experience": 650,
+		"logins": 77,
+		/* "wealth": 6298078,
+		"classify": "酱油",
+		"score": 31 */
+	}, {
+		"id": 10003,
+		"username": "003",
+		"sex": "收款单",
+		"city": "草稿",
+		"sign": "2019/5/20",
+		"experience": 362,
+		"logins": 157,
+		/* "wealth": 37117017,
+		"classify": "诗人",
+		"score": 68 */
+	}, {
+		"id": 10004,
+		"username": "004",
+		"sex": "派件单",
+		"city": "草稿",
+		"sign": "2019/5/20",
+		"experience": 807,
+		"logins": 51,
+		/* "wealth": 76263262,
+		"classify": "作家",
+		"score": 6 */
+	}, {
+		"id": 10005,
+		"username": "005",
+		"sex": "中转中心到达单",
+		"city": "审批",
+		"sign": "2019/5/20",
+		"experience": 173,
+		"logins": 68,
+		/* "wealth": 60344147,
+		"classify": "作家",
+		"score": 87 */
+	}, {
+		"id": 10006,
+		"username": "006",
+		"sex": "入库单",
+		"city": "草稿",
+		"sign": "退回",
+		"experience": 982,
+		"logins": 37,
+		/* "wealth": 57768166,
+		"classify": "作家",
+		"score": 34 */
+	}, {
+		"id": 10007,
+		"username": "007",
+		"sex": "中转单",
+		"city": "审批",
+		"sign": "签名-7",
+		"experience": 727,
+		"logins": 150,
+		/* "wealth": 82030578,
+		"classify": "作家",
+		"score": 28 */
+	}, {
+		"id": 10008,
+		"username": "008",
+		"sex": "出库单",
+		"city": "提交",
+		"sign": "签名-8",
+		"experience": 951,
+		"logins": 133,
+		/* "wealth": 16503371,
+		"classify": "词人",
+		"score": 14 */
+	}, {
+		"id": 10009,
+		"username": "009",
+		"sex": "付款单",
+		"city": "提交",
+		"sign": "签名-9",
+		"experience": 484,
+		"logins": 25,
+		/* "wealth": 86801934,
+		"classify": "词人",
+		"score": 75 */
+	}]
+}

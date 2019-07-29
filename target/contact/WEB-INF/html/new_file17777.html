@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<%--修改的弹框--%>
+<form class="layui-form layui-form-pane1" id="form1" name="form1" style="display: none;" action="<%=request.getContextPath()%>/admin/modiAdmin" method="post" lay-filter="first1">
+
+    <div class="layui-form-item" style="display: none">
+        <label class="layui-form-label">id</label>
+        <div class="layui-input-inline">
+            <input type="text" name="id" id="id" lay-verify="required|title" required placeholder="请输入账号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="account" id="account" lay-verify="required|title" required placeholder="请输入账号" readonly="readonly" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-inline">
+            <input type="password" name="password" id="password" lay-verify="required|pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" id="name" lay-verify="required|" required placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机</label>
+        <div class="layui-input-inline">
+            <input type="tel" name="phone" id="phone" lay-verify="required|number" placeholder="请输入使用者手机号码" lay-verType="tips" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限</label>
+        <div class="layui-input-inline">
+            <select name="power"  id="power" lay-verify="required|" lay-filter="interest-search" lay-search>
+                <option value=""></option>
+                <option value="一般管理员">一般管理员</option>
+                <option value="超级管理员" >超级管理员</option>
+
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-inline">
+            <select name="status" id="status" lay-verify="required|" lay-filter="interest-search" lay-search>
+                <option value=""></option>
+                <option value="启用">启用</option>
+                <option value="停用" >停用</option>
+
+
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">修改</button>
+        </div>
+    </div>
+</form>
+	</body>
+</html>

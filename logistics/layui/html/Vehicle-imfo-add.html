@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css">
+		<script src="../jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<div class="layui-form-item pane">
+				<div class="layui-form-item pane" >
+					<div class="layui-form-item">
+						<label class="layui-form-label">购车时间</label>
+						<div class="layui-inline" > 
+						  <input type="text" class="layui-input" readonly id="test1" placeholder="请选择购车时间" name="carBuyTime">
+						</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">车辆代号</label>
+							<div class="layui-input-block">
+								<input type="text" name="carCarNo" required lay-verify="required" placeholder="请输入车辆代号" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">发动机号</label>
+							<div class="layui-input-block">
+								<input type="text" name="carEngineNo" required lay-verify="required" placeholder="请输入发动机号" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">底盘编号</label>
+					<div class="layui-input-block">
+						<input type="text" name="carBaseplateNo" required lay-verify="required" placeholder="请输入底盘编号" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">车牌号</label>
+					<div class="layui-input-block">
+						<input type="text" name="carNo" required lay-verify="required" placeholder="请输入车牌号" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">服役时间</label>
+					<div class="layui-input-block">
+						<input type="text" name="carAge" required lay-verify="required" placeholder="请输入服役时间" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block" align="center">
+			<button class="layui-btn" lay-submit lay-filter="formDemo" href=""
+			>确认添加</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+				</div>
+			</div>
+		</form>
+<script src="../layui.js"></script>
+		<script>
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					layer.msg(JSON.stringify(data.field));
+					$.ajax({
+						type: "POST",
+						url: "http://192.168.2.177:8080/tran/addCar",
+						data: JSON.stringify(data.field),
+						contentType: "application/json",
+						dataType: 'json',
+						success: function(data) {
+							alert("提交成功!");
+							sessionStorage.setItem("receive", "success");
+						},
+						error: function(ERR) {
+							console.log(ERR);
+							alert("提交失败！！！！");
+						}
+					})
+					return false;
+				});
+			});
+			$(document).ready(function() {
+				$("#add").click(function() {
+					
+					var data = {
+						carBuyTime: $("carBuyTime").val(),
+						carCarNo: $("carCarNo").val(),
+						carEngineNo: $("carEngineNo").val(),
+						carBaseplateNo: $("carBaseplateNo").val(),
+						carNo: $("carNo").val(),
+						carAge: $("carAge").val()
+					}
+				})
+			})
+			
+			layui.use('laydate', function(){
+			  var laydate = layui.laydate;
+			  
+			  //执行一个laydate实例
+			  laydate.render({
+			    elem: '#test1' //指定元素
+			  });
+			});
+		</script>
+	</body>
+</html>

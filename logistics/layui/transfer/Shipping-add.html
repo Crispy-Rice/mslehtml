@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>寄件人</title>
+		<link rel="stylesheet" href="../css/layui.css">
+		<script src="../jquery-3.3.1.min.js"></script>
+		
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<div class="layui-form-item pane">
+				<div class="layui-form-item">
+					<label class="layui-form-label">中转中心编号</label>
+					<div class="layui-input-block">
+						<input type="text" name="centerLoadCenterId" required lay-verify="required" placeholder="请输入中转中心编号" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">装运日期</label>
+					<div class="layui-inline">
+						<input type="text" name="centerLoadDate" class="layui-input" readonly id="test1" placeholder="请选择装运日期">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">装车单编号</label>
+					<div class="layui-input-block">
+						<input type="text" name="centerLoadLoadId" required lay-verify="required" placeholder="请输入装车单编号" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">汽运编号</label>
+					<div class="layui-input-block">
+						<input type="text" name="centerLoadTranno" required lay-verify="required" placeholder="请输入汽运编号" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">车辆代号</label>
+					<div class="layui-input-block">
+						<input type="text" name="centerLoadCarNo" required lay-verify="required" placeholder="请输入车辆代号" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">目的地</label>
+					<div class="layui-input-block">
+						<input type="text" name="centerLoadDestination" required lay-verify="required" placeholder="请选择目的地" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">押运员</label>
+					<div class="layui-input-block">
+						<input type="text" name="centerLoadSupercargo" required lay-verify="required" placeholder="请输入押运员" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">监装员</label>
+					<div class="layui-input-block">
+						<input type="text" name="centerLoadSupervisor" required lay-verify="required" placeholder="请选择监装员" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">条形码</label>
+					<div class="layui-input-block">
+						<input type="text" name="centerLoadOrder" required lay-verify="required" placeholder="请选择条形码" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<label class="layui-form-label">运费</label>
+				<div class="layui-input-block">
+					<input type="text" name="centerLoadFee" required lay-verify="required" placeholder="请输入运费" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block" align="center">
+					<button class="layui-btn" lay-submit lay-filter="formDemo" href="" id="add">确认添加</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+		<script src="../layui.js"></script>
+		<script>
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+						layer.msg(JSON.stringify(data.field));
+						$.ajax({
+							type: "POST",
+							url: "http://192.168.2.177:8080/tran/addCenterLoad",
+							data: JSON.stringify(data.field),
+							contentType: "application/json",
+							dataType: 'json',
+							success: function(data) {
+								alert("提交成功!");
+								sessionStorage.setItem("receive", "success"); //向session存入接件成功标志
+								// top.location.href="Receive.html";
+								// target="main";
+								// // window.history.
+							},
+							error: function(ERR) {
+								console.log(ERR);
+								alert("提交失败！！！！");
+							}
+						})
+						return false;
+					});
+				});
+				
+				$(document).ready(function() {
+					$("#add").click(function() {
+						// alert("asdasdas");
+						var data = {
+							centerLoadCenterId: $("centerLoadCenterId").val(),
+							centerLoadDate: $("centerLoadDate").val(),
+							centerLoadLoadId: $("centerLoadLoadId").val(),
+							centerLoadTranno: $("centerLoadTranno").val(),
+							centerLoadDestination: $("centerLoadDestination").val(),
+							centerLoadCarNo: $("centerLoadCarNo").val(),
+							centerLoadSupercargo: $("centerLoadSupercargo").val(),
+							centerLoadOrder: $("centerLoadOrder").val(),
+							centerLoadFee: $("centerLoadFee").val(),
+						}
+					})
+				})
+
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+
+				//执行一个laydate实例
+				laydate.render({
+					elem: '#test1' //指定元素
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,63 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 50,
+	"data": [{
+		"loadinglist_id": 1,
+		"loadlinglist_loaddate": "2019/7/1",
+		"loadlinglist_hallno": 1,
+		"loadlinglist_tranno": 1,
+		"loadlinglist_destination": "南京",
+		"loadinglist_carno": 1,
+		"loadinglist_supervisor": "1",
+		"loadinglist_supercargo": "1",
+		"loadlinglist_fee": 50.0,
+		"loadinglist_status": "草稿"
+	}, {
+		"loadinglist_id": 2,
+		"loadlinglist_loaddate": "2019/7/2",
+		"loadlinglist_hallno": 2,
+		"loadlinglist_tranno": 2,
+		"loadlinglist_destination": "北京",
+		"loadinglist_carno": 2,
+		"loadinglist_supervisor": "2",
+		"loadinglist_supercargo": "2",
+		"loadlinglist_fee": 50.0,
+		"loadinglist_status": "草稿"
+	}, {
+		"loadinglist_id": 3,
+		"loadlinglist_loaddate": "2019/7/3",
+		"loadlinglist_hallno": 3,
+		"loadlinglist_tranno": 3,
+		"loadlinglist_destination": "广州",
+		"loadinglist_carno": 3,
+		"loadinglist_supervisor": "3",
+		"loadinglist_supercargo": "3",
+		"loadlinglist_fee": 100.0,
+		"loadinglist_status": "草稿"
+	},
+	{
+		"loadinglist_id": 3,
+		"loadlinglist_loaddate": "2019/7/3",
+		"loadlinglist_hallno": 3,
+		"loadlinglist_tranno": 3,
+		"loadlinglist_destination": "广州",
+		"loadinglist_carno": 3,
+		"loadinglist_supervisor": "3",
+		"loadinglist_supercargo": "3",
+		"loadlinglist_fee": 100.0,
+		"loadinglist_status": "草稿"
+	},
+	{
+		"loadinglist_id": 3,
+		"loadlinglist_loaddate": "2019/7/3",
+		"loadlinglist_hallno": 3,
+		"loadlinglist_tranno": 3,
+		"loadlinglist_destination": "广州",
+		"loadinglist_carno": 3,
+		"loadinglist_supervisor": "3",
+		"loadinglist_supercargo": "3",
+		"loadlinglist_fee": 100.0,
+		"loadinglist_status": "草稿"
+	}]
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- 库存信息 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css" media="all">
+		<script src="../jquery-3.3.1.min.js"></script>
+	</head>
+	<body style="w">
+
+		<table class="layui-hide" id="test" lay-filter="test" lay-data="{height:'full-200'}"></table>
+		<script type="text/html" id="toolbarDemo">
+			<div class="demoTable" style="float:left;>
+		  搜索ID：
+		  <div class=" layui-inline"">
+    <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+
+    <button data-method="offset" data-type="auto" id="test2" class="layui-btn layui-btn-normal">
+        <i class="layui-icon layui-icon-add-circle-fine"></i>添加接收单
+    </button>
+    </div>
+</script>
+
+
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+		<script src="../layui.js"></script>
+
+		<script>
+			layui.use(['table', 'layer'], function() {
+				var table = layui.table;
+				var layer = layui.layer;
+				var $ = layui.jquery;
+				table.render({
+					elem: '#test',
+					url: '../json/vehicle-mng.json',
+					toolbar: '#toolbarDemo',
+					title: '用户数据表',
+					done: function(res, curr, count) {
+						count || this.elem.next('.layui-table-view').find('.layui-table-header').css('overflow', 'auto');
+						layui.each($('select'), function(index, item) {
+							var elem = $(item);
+							elem.val(elem.data('value')).parents('div.layui-table-cell').css('overflow', 'visible');
+						});
+						form.render();
+					},
+					cols: [
+						[{
+							type: 'checkbox',
+							fixed: 'left'
+						}, {
+							field: 'loadinglist_id',
+							align: 'center',
+							title: 'ID',
+
+							unresize: true,
+							sort: true
+						}, {
+							field: 'loadlinglist_loaddate',
+							align: 'center',
+							title: '中转中心编号',
+							edit: 'text'
+						}, {
+							field: 'loadlinglist_destination',
+							align: 'center',
+							title: '到达日期'
+						}, {
+							field: 'loadinglist_carno',
+							title: '中转单编号',
+							templet: "#energyTyoebar",
+							align: 'center'
+						}, {
+							field: 'loadinglist_supervisor',
+							title: '出发地',
+							align: 'center'
+						}, {
+							field: 'loadinglist_supercargo',
+							title: '货物到状态',
+							sort: true,
+							align: 'center'
+						}, {
+							field: 'loadlinglist_fee',
+							title: '车辆代号',
+							align: 'center'
+						}, {
+							field: 'loadlinglist_fee',
+							title: '监装员',
+							align: 'center'
+						}, {
+							field: 'loadlinglist_fee',
+							title: '条形码',
+							align: 'center'
+						},  {
+							fixed: 'right',
+							title: '操作',
+							toolbar: '#barDemo',
+							align: 'center'
+						}]
+					],
+					page: true
+				});
+
+				//监听行工具事件
+				table.on('tool(test)', function(obj) {
+					var data = obj.data;
+					//console.log(obj)
+					if (obj.event === 'del') {
+						layer.confirm('确认删除吗？', function(index) {
+							obj.del();
+							layer.close(index);
+						});
+					} else if (obj.event === 'edit') {
+						layer.prompt({
+							formType: 2,
+							value: data.email
+						}, function(value, index) {
+							obj.update({
+								email: value,
+								sex: value,
+							});
+							layer.close(index);
+						});
+					}
+				});
+				
+				$('#test2').on('click', function() {
+					layer.open({
+						type: 2,
+						title: '添加接件单',
+						maxmin: true,
+						shadeClose: true, //点击遮罩关闭层
+						area: ['800px', '550px'],
+						content: 'Receive-add.html'
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>
+

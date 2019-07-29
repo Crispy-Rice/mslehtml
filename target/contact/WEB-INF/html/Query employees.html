@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全部人员</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../layui/layui-v2.5.4/layui/css/layui.css">
+		<link rel="stylesheet" type="text/css" href="../css/hp-common.css" />
+		<script src="../jquery/jquery-2.1.4.js"></script>
+	</head>
+
+	<body>
+		<div class="hp-div-form">
+			<blockquote class="layui-elem-quote">
+							<div class="layui-inline hp-form-inline">
+								<label class="layui-form-label hp-form-label">工号：</label>
+								<div class="layui-input-inline" style="width: 150px;">
+									<input type="text" name="demoReload" id="demoReload" placeholder="请输入工号" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline hp-form-inline">
+								<div class="layui-input-inline" style="width: 150px;">
+									<button class="layui-btn" type="button" onclick="select()"><i class="layui-icon"></i>查询</button>
+								</div>
+							</div>
+		<div class="layui-btn-group demoTable">
+			<!-- <button class="layui-btn layui-btn-normal" id="test2"><i class="layui-icon"></i>添加</button>
+			<button class="layui-btn layui-btn-danger"><i class="layui-icon"></i>删除</button> -->
+			<button id="refrsh" class="layui-btn hp-btn-green"><i class="layui-icon">&#xe669;</i>刷新</button>
+		</div>
+		<!-- 方法级渲染 -->
+		<table class="layui-table" id="demo" lay-filter="demo"></table>
+		</div>
+		</form>
+		  
+		</blockquote>
+		</div>
+		<script type="text/html" id="hp_toolbar">
+<!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+  <a class="layui-btn layui-btn-xs" lay-event="edit" >修改</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+	</body>
+	<script src="../layui/layui-v2.5.4/layui/layui.js"></script>
+	<script src="../jquery/jquery-3.3.1.min.js"></script>
+	<script>
+		allUser("http://192.168.2.220:8080/staff/getAllStaffsOnjob");
+		//根据id查询
+		var demoReload;
+		
+		function select() {
+			demoReload = $("#demoReload").val();
+			if (demoReload == "") {
+				alert("工号不得为空！")
+			} else {
+				var url = "http://192.168.2.220:8080/organization/getPersonnelInformation?staffId=" + demoReload;
+				allUser(url);
+			}
+		}
+		// 刷新
+		function shuaxin() {
+			allUser("http://192.168.2.220:8080/staff/getAllStaffsOnjob");
+		}
+		
+		function allUser(url){
+		
+		layui.use(['table','element'], function() {
+
+			var table = layui.table;
+			var element = layui.element;
+			var $ = layui.$;
+			// 方法级渲染
+			table.render({
+				elem: '#demo',
+				url: url,
+				cellMinWidth: 80,
+				showLoad: true,
+				page: true,
+				cols: [
+					[{
+							type: 'checkbox',
+							fixed: 'left'
+						},
+						{
+							field: 'staffId',
+							sort: true,
+							title: '员工号'
+						},
+						{
+							field: 'staffName',
+							sort: true,
+							title: '员工名'
+						},
+						/* {
+							field: 'staffPassword',
+							sort: true,
+							title: '员工密码'
+						}, */
+						{
+							field: 'staffGender',
+							sort: true,
+							title: '员工性别'
+						},
+						{
+							field: 'staffAge',
+							sort: true,
+							title: '员工年龄'
+						},
+						{
+							field: 'staffPhone',
+							sort: true,
+							title: '手机号'
+						},
+						{
+							field: 'staffPosition',
+							sort: true,
+							title: '员工职位',
+							
+						},
+						{
+							field: 'staffResponsibility',
+							sort: true,
+							title: '员工职责'
+						},
+						{
+						field: 'staffStrategyRate',
+							sort: true,
+							title: '员工底薪'
+						},
+						{	
+						field: 'staffStrategyMonthly',
+							sort: true,
+							title: '提成/月'
+						},
+						{	
+						field: 'staffStrategyMetering',
+							sort: true,
+							title: '提成/次'
+						},
+						{
+						field: 'staffOrganization',
+							sort: true,
+							title: '所属机构'
+						},
+						{	
+						field: 'staffStatus',
+							sort: true,
+							title: '在职/离职'
+						},
+						{		
+							fixed: 'right',
+							width: 178,
+							align: 'center',
+							toolbar: '#hp_toolbar',
+							title: '操作'
+						}
+					]
+				],
+				done: function() {
+					//console.log(111111111)
+					element.render('progress');
+				}
+			});
+			// 表格刷新
+			$("#refrsh").click(function() {
+				//执行重载
+				table.reload('demo', {
+					page: {
+						curr: 1 //重新从第 1 页开始
+					},
+					where: {
+						// 参数
+						kd: 'kd'
+					},
+					done: function() {
+						element.render('progress');
+					}
+				});
+
+			})
+
+			//监听表格复选框选择
+			table.on('checkbox(demo)', function(obj) {
+				console.log(obj)
+			});
+
+			//监听单元格编辑
+			table.on('edit(demo)', function(obj) {
+				var value = obj.value //得到修改后的值
+					,
+					data = obj.data //得到所在行所有键值
+					,
+					field = obj.field; //得到字段
+
+			});
+			//监听工具条
+			table.on('tool(demo)', function(obj) {
+				var data = obj.data;
+				if (obj.event === 'del') {
+					layer.confirm('真的删除行么', function(index) {
+						obj.del();
+						layer.close(index);
+					});
+				} else if(layEvent === 'edit'){ //编辑
+        console.log(data);
+						layer.open({
+                            type: 1,
+                            area: ['500px', '700px'],
+                            title: "更改信息",
+                            fixed: false, //不固定
+                            maxmin: true,
+                            maxmin: false,
+                            shadeClose:false,
+                            content:'user.html' 
+                          });
+                          //表单值
+                          form.val("demo",{
+                            "staffId":data.staffId,
+                            "staffName":data.staffName,
+                            "staffGender":data.staffGender,
+                            "staffAge":data.staffAge,
+                            "staffPhone":data.staffPhone,
+							"staffPosition":data.staffPosition,
+							"staffResponsibility":data.staffResponsibility,
+							"staffStrategyRate":data.staffStrategyRate,
+							"staffStrategyMonthly":data.staffStrategyMonthly,
+							"staffStrategyMetering":data.staffStrategyMetering,
+							"staffOrganization":data.staffOrganization,
+							"staffStatus":data.staffStatus,
+	    //同步更新缓存对应的值
+        //     layer.confirm('要修改ID为：'+data.userId+"的用户吗?", function(index){
+        //         console.log(data.inexType);
+        //         var useredit={
+        //             "userId":data.userId,
+        //             "jobNo":data.jobNo,
+        //             "userName":data.userName,
+        //             "pwd":data.pwd,
+        //             "class":data.class
+        //         };
+        //         $.ajax({
+        //         url:'',
+        //         type:'post',
+        //         data:edit,
+        //         dataType:'json',
+        //          success:function(sess){
+        //            if(sess==200){
+        //             layer.msg("编辑成功",{icon:1});
+        //                     }
+        //                 else{
+        //             layer.msg("编辑失败",{icon:5});
+        //                     }
+        //                 },
+        //                error:function (xhr,status,error) {
+        //                    console.log(xhr);
+        //                    console.log(status);
+        //                    console.log(error);
+        //                   }
+        //    });
+        //     });
+                         });
+        }
+    });
+	})
+	}
+	</script>
+	</body>
+</html>

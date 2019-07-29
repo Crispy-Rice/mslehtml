@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- 接件管理 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css" media="all">
+		<script src="../jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<table class="layui-hide" id="test" lay-filter="test"></table>
+		<script type="text/html" id="toolbarDemo">
+			<div class="demoTable"  style="float:left;>
+		  搜索ID：
+		  <div class="layui-inline"">
+		    <input class="layui-input" name="id" id="demoReload" autocomplete="off" placeholder="请按ID搜索接件单">
+		  </div>
+		  <button class="layui-btn" data-type="reload" onclick="select()">搜索</button>
+		</div>
+		<div
+		 <button data-method="offset" data-type="auto" id="test2" class="layui-btn layui-btn-normal">
+			<i class="layui-icon layui-icon-add-circle-fine"></i>添加接件单</button>
+			</div>
+			<input class="layui-btn" type="submit" value="刷新" id="btn" onclick="shuaxin()">
+  </div>
+	
+</script>
+
+	<script type="text/html" id="barDemo">
+		 <a class="layui-btn layui-btn-xs" lay-event="edit" id="update">编辑</a>
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+		<script src="../layui.js"></script>
+		<script>
+			allUser("http://192.168.2.177:8080/tran/getArrivalByHallId?id=010000");
+			//根据接件单id查询
+			var demoReload;
+			
+			function select() {
+				demoReload = $("#demoReload").val();
+				if (demoReload == "") {
+					alert("接收单号不得为空！")
+				} else {
+					var url = "http://192.168.2.177:8080/tran/getArrivalById?id=" + demoReload;
+					allUser(url);
+				}
+			}
+			
+			// 刷新
+			function shuaxin() {
+				allUser("http://192.168.2.177:8080/tran/getArrivalByHallId?id=010000");
+			}
+			
+			//查询全部
+			function allUser(url) {
+				layui.use(['table', 'layer'], function() {
+					var table = layui.table;
+					var layer = layui.layer;
+					var $ = layui.jquery;
+					table.render({
+						elem: '#test',
+						url: url,
+						toolbar: '#toolbarDemo',
+						title: '用户数据表',
+						cols: [
+							[{
+								type: 'checkbox',
+								fixed: 'left'
+							}, {
+								field: 'arrivalId',
+								title: '接件单ID',
+								width: 0,
+								fixed: 'left',
+								unresize: true,
+								sort: true,
+								align: 'center'
+							}, {
+								field: 'arrivalArriveDate',
+								title: '到达日期',
+								align: 'center',
+								width: 0,
+								edit: 'text'
+							}, {
+								field: 'arrivalTransferId',
+								title: '中转单编号',
+								width: 0
+							}, {
+								field: 'arrivalDeparture',
+								title: '出发地',
+								width: 0
+							}, {
+								field: 'arrivalState',
+								title: '货物到达状态',
+								width: 0
+							}, {
+								fixed: 'right',
+								title: '操作',
+								toolbar: '#barDemo',
+								width: 0
+							}]
+						],
+					page: true
+				});
+
+				//监听行工具事件
+				table.on('tool(test)', function(obj) {
+					var data = obj.data;
+					if (obj.event == 'del') {
+						layer.confirm('确认删除吗？', function(index) {
+							$.ajax({
+								type: 'DELETE',
+								url: "http://192.168.2.177:8080/tran/deleteArrivalById?loadingListId=" + obj.data.arrivalId,
+								dataType: 'json',
+								success: function(result) {
+									history.go(0),
+										obj.del(),
+										layer.close(index);
+								},
+								error: function(error) {
+									console.log(error);
+								}
+							})
+						});
+					}
+				
+				// 编辑按钮
+				table.on('tool(test)',function(obj){
+					var id = obj.data.arrivalId;//拿到接收单id
+					sessionStorage.setItem("key",id); //用session存接收单id
+					layer.open({
+						type: 2,
+						title: '添加接件单',
+						maxmin: true,
+						shadeClose: true, //点击遮罩关闭层
+						area: ['800px', '500px'],
+						content: 'Good-update.html'
+					});
+				});
+					
+
+				$('#test2').on('click', function() {
+					layer.open({
+						type: 2,
+						title: '添加接件单',
+						maxmin: true,
+						shadeClose: true, //点击遮罩关闭层
+						area: ['800px', '500px'],
+						content: 'Good-add.html'
+					});
+				});
+			});
+			});
+			}
+		</script>
+	</body>
+</html>

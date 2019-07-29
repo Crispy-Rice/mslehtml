@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>收件信息输入</title>
+		<link rel="stylesheet" href="../layui/layui-v2.5.4/layui/css/layui.css">
+		<script src="../layerdate/layDate-v5.0.9/laydate/laydate.js"></script>
+		<script src="../layui/layui-v2.5.4/layui/layui.js"></script>
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<blockquote class="layui-elem-quote">
+				<div class="layui-form-item">
+					<label class="layui-form-label">接收时间</label>
+					<div class="layui-input-block">
+					<input type="text"  id="test" name="logisticsCourierIdtime" required lay-verify="required" placeholder="填写快递接收时间" autocomplete="off" class="layui-input">   
+						</div>
+					</div>
+					<div class="layui-form-item">
+					<label class="layui-form-label">姓名</label>
+					<div class="layui-input-block">
+					<input type="text"  id="test" name="logisticsRecipients" required lay-verify="required" placeholder="姓名" autocomplete="off" class="layui-input">   
+						</div>
+					</div>
+					<div class="layui-form-item">
+					<label class="layui-form-label">签收时间</label>
+					<div class="layui-input-block">
+					<input type="text"  id="test" name="logisticsRecipientstime" required lay-verify="required" placeholder="填写快递签收时间" autocomplete="off" class="layui-input">   
+						</div>
+					</div>
+				<!-- <div class="layui-input-block">
+					<input type="text" name="logisticsCourierIdtime" required lay-verify="required" placeholder="接到接收时间" autocomplete="off" class="layui-input">
+					<input type="text" name="logisticsRecipients" required lay-verify="required" placeholder="姓名" autocomplete="off" class="layui-input">
+					<input type="text" name="logisticsRecipientstime" required lay-verify="required" placeholder="快递签收时间" autocomplete="off" class="layui-input">
+				</div>
+			</div> -->
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit lay-filter="formDemo1">提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+			</blockquote>
+		</form>
+		<script src="../jquery/jquery-3.3.1.min.js"></script>
+		<script>
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+
+				form.on('submit(formDemo1)', function(data) {
+					layer.msg(JSON.stringify(data.field));
+							$.ajax({
+								type: "post",
+								url: "http://192.168.2.220:8080/order/writeConsigneeInformation",
+								data: JSON.stringify(data.field),
+								contentType: "application/json",
+								dataType: 'json',
+								success: function(data) {
+									alert("提交成功!");
+									sessionStorage.setItem("receive", "success"); //向session存入接件成功标志
+									// top.location.href="Receive.html";
+									// target="main";
+									// // window.history.
+								},
+								error: function(ERR) {
+									console.log(ERR);
+									alert("提交失败！！！！");
+								}
+							})
+							return false;
+						});
+					});
+					
+					$(document).ready(function() {
+						$("#add").click(function() {
+							// alert("asdasdas");
+							var data = {
+								logisticsCourierIdtime: $("logisticsCourierIdtime").val(),
+								logisticsRecipients: $("logisticsRecipients").val(),
+								logisticsRecipientstime: $("logisticsRecipientstime").val()	
+							}
+						})
+					});
+					
+						
+		</script>
+	</body>
+</html>

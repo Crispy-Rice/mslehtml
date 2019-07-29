@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>...</title>
+		<link rel="stylesheet" href="../layui/layui-v2.5.4/layui/css/layui.css">
+	</head>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+
+			<div class="layui-body">
+				<!-- 内容主体区域 -->
+				<table id="demo" lay-filter="test"></table>
+			</div>
+		</div>
+		<script src="../layui/layui-v2.5.4/layui/layui.js"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use('element', function() {
+				var element = layui.element;
+				//一些事件监听
+				element.on('tab(demo)', function(data) {
+					console.log(data);
+				});
+			});
+
+			layui.use('table', function() {
+				var table = layui.table;
+				//监听单元格编辑
+				table.render({
+					elem: '#demo',
+					height: 500,
+					url: 'http://192.168.2.220:8080/staff/getAllStaffsOnjob' //数据接口
+						,
+					page: true //开启分页
+						,
+					cols: [
+						[ //表头
+							//全选
+							{
+								type: 'checkbox'
+							}
+							//edit: 'text'为开启单元格编辑，sort:true开启排序
+							, {
+								field: 'staffId',
+								title: 'ID',
+								width: 0,
+								unresize: true,
+								sort: true,
+								edit: 'text'
+							}, {
+								field: 'staffPosition',
+								title: '职位',
+								width: 0,
+								unresize: true,
+								sort: true,
+								edit: 'text'
+							}, {
+								field: 'staffStrategyRate',
+								title: '底薪',
+								width: 0,
+								unresize: true,
+								sort: true,
+								edit: 'text'
+							},{
+									field: 'staffStrategyMetering',
+									title: '次/提成',
+									width: 0,
+									edit: 'text'
+							}, {
+									field: 'staffStrategyMonthly',
+									title: '月/提成',
+									width: 0,
+									edit: 'text',
+									
+								
+							} ,{
+									title: '操作',
+									toolbar: '#barDemo',
+									width: 0,
+									limit: 10
+								}
+						]
+					],
+				});
+				table.on('edit(test)', function(obj) {
+					var value = obj.value //得到修改后的值
+						,
+						data = obj.data //得到所在行所有键值
+						,
+						field = obj.field; //得到字段
+					layui.use('jquery', function() {
+						var $ = layui.$;
+						$.ajax({
+							type: 'post',
+							url: "http://192.168.2.220:8080/staff/updateStaffSalary", // ajax请求路径  
+							data: {
+								id:data.id,
+                                field:field,
+                                value:value
+								/* staffId = data.staffId,
+								staffPosition = data.staffPosition,
+								staffStrategyRate = data.staffStrategyRate,
+								staffStrategyMetering = data.staffStrategyMetering,
+								staffStrategyMonthly = data.staffStrategyMonthly,
+								field:field,
+                                value:value */
+							},
+							success: function(data) {
+								layer.msg('修改成功');
+							}
+						});
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

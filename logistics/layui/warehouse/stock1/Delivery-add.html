@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>寄件人</title>
+		<link rel="stylesheet" href="../css/layui.css">
+
+		<script type="text/javascript">
+			//自定义日期格式
+			laydate.render({
+				elem: '#test',
+				format: 'yyyy年MM月dd日 HH时mm分ss秒', //可任意组合
+			});
+		</script>
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<div class="layui-form-item pane">
+				<div class="layui-form-item">
+					<label class="layui-form-label">快递编号</label>
+					<div class="layui-input-block">
+						<input type="text" name="title" required lay-verify="required" placeholder="请输入快递编号" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">出库日期</label>
+					<div class="layui-inline">
+						<input type="text" class="layui-input" readonly id="test1" placeholder="请选择出库日期">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">目的地</label>
+					<div class="layui-input-block">
+						<input type="text" name="title" required lay-verify="required" placeholder="请选择目的地" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+					<div class="layui-form-item">
+							<label class="layui-form-label">货物装运形式</label>
+							<div class="layui-input-block">
+							<select name="city" lay-verify="">
+								<option value="">请选择物品状态</option>
+								<option value="">火车</option>
+								<option value="">飞机</option>
+								<option value="">汽车</option>
+							</select>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">编号</label>
+					<div class="layui-input-block">
+						<input type="text" name="title" required lay-verify="required" placeholder="请输入编号" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block" align="center">
+						<button class="layui-btn" lay-submit lay-filter="formDemo" href="">确认添加</button>
+						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					</div>
+				</div>
+		</form>
+		<script src="../layui.js"></script>
+		<script>
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					layer.msg(JSON.stringify(data.field));
+					return 2;
+				});
+			});
+
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+
+				//执行一个laydate实例
+				laydate.render({
+					elem: '#test1' //指定元素
+				});
+			});
+		</script>
+	</body>
+</html>

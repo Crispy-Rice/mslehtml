@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/layui.css">
+		<script src="../jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<div class="layui-form-item pane">
+				<div class="layui-form-item">
+					<label class="layui-form-label">收款日期</label>
+					<div class="layui-inline">
+						<!-- 注意：这一层元素并不是必须的 -->
+						<input type="text" name="receiptDate" class="layui-input" readonly id="test1" placeholder="请选择收款日期">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">收款金额</label>
+					<div class="layui-input-block">
+						<input type="text" name="receiptCollections" required lay-verify="required" placeholder="请输入收款金额" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">收款快递员</label>
+					<div class="layui-input-block">
+						<input type="text" name="receiptPostman" required lay-verify="required" placeholder="请选择快递员" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">条形码</label>
+					<div class="layui-input-block">
+						<input type="text" name="receiptOrderId" required lay-verify="required" placeholder="请选择条形码" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block" align="center">
+						<button class="layui-btn" lay-submit lay-filter="formDemo" href="">确认添加</button>
+						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					</div>
+				</div>
+		</form>
+		<script src="../layui.js"></script>
+		<script>
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+						layer.msg(JSON.stringify(data.field));
+						$.ajax({
+							type: "POST",
+							url: "http://192.168.2.177:8080/account/addReceipt",
+							data: JSON.stringify(data.field,peopleId=1),
+							contentType: "application/json",
+							dataType: 'json',
+							success: function(data) {
+								alert("提交成功!");
+								sessionStorage.setItem("receive", "success"); //向session存入接件成功标志
+								// top.location.href="Receive.html";
+								// target="main";
+								// // window.history.
+							},
+							error: function(ERR) {
+								console.log(ERR);
+								alert("提交失败！！！！");
+							}
+						})
+						return false;
+					});
+				});
+				$(document).ready(function() {
+					$("#add").click(function() {
+						var data = {
+							peopleId:1,
+							receiptDate: $("receiptDate").val(),
+							receiptPostman: $("receiptPostman").val(),
+							receiptOrderId: $("receiptOrderId").val()
+						}
+					})
+				})
+
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+
+				//执行一个laydate实例
+				laydate.render({
+					elem: '#test1' //指定元素
+				});
+			});
+		</script>
+	</body>
+</html>

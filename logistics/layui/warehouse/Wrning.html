@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>库存警戒线</title>
+    <link rel="stylesheet" href="../css/layui.css">
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>设置库存警戒线</legend>
+</fieldset>
+<div id="slideTest2" class="demo-slider"></div>
+<script src="../layui.js" charset="utf-8"></script>
+<script>
+    layui.use('slider', function () {
+        var $ = layui.$
+            , slider = layui.slider;
+        //定义初始值
+        slider.render({
+            elem: '#slideTest2'
+            , value: 85 //初始值
+        });
+    });
+</script>
+</body>
+</html>
