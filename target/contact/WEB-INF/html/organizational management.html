@@ -48,7 +48,7 @@
 			// 方法级渲染
 			table.render({
 				elem: '#demo',
-				url: 'http://192.168.2.220:8080/organization/getAllOrganization',
+				url: 'http://192.168.2.177:8080/organization/getAllOrganization',
 				cellMinWidth: 80,
 				showLoad: true,
 				page: true,
@@ -130,7 +130,7 @@
 					layer.confirm('确认删除吗？', function(index) {
 						$.ajax({
 							type: 'GET',
-							url: "http://192.168.2.220:8080/organization/deleteOrganization?organizationId=" + obj.data.organizationId,
+							url: "http://192.168.2.177:8080/organization/deleteOrganization?organizationId=" + obj.data.organizationId,
 							dataType: "json",
 							success: function(result) {
 								history.go(0);
@@ -166,7 +166,7 @@
 	           	 var field = data.field; //获取提交的字段
 			           	admin.req({
 							type:'post',
-							url: 'http://192.168.2.220:8080/organization/updateOrganization',  //开发时传入真实接口
+							url: 'http://192.168.2.177:8080/organization/updateOrganization',  //开发时传入真实接口
 							data: data ,
 							success: function (data) {
 								if (data.code == 0) {

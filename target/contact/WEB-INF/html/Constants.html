@@ -92,7 +92,7 @@
             alert("目的地不得为空！");
         }else{
             $.ajax({
-                url: 'http://192.168.2.220:8080/constant/getPersonnelInformation',//后台地址
+                url: 'http://192.168.2.177:8080/constant/getPersonnelInformation',//后台地址
                 type: 'POST',
                 data: {'constantCityStart': constantCityStart, "constantCityEnd": constantCityEnd},//参数
                 success: function (data) {
@@ -107,7 +107,7 @@
 
     });
 	
-		//allUser("http://192.168.2.220:8080/constant/getAllConstants");
+		//allUser("http://192.168.2.177:8080/constant/getAllConstants");
 		//根据两地城市查询
 		//var demoReload;
 		
@@ -116,13 +116,13 @@
 			//if (demoReload == "") {
 			//	alert("不得为空！")
 			//} else {
-			//	var url = "http://192.168.2.220:8080/constant/getPersonnelInformation";
+			//	var url = "http://192.168.2.177:8080/constant/getPersonnelInformation";
 			//	allUser(url);
 			//}
 		//}
 		// 刷新
 		//function shuaxin() {
-			//allUser("http://192.168.2.220:8080/constant/getAllConstants");
+			//allUser("http://192.168.2.177:8080/constant/getAllConstants");
 		//}
 		
 		//function allUser(url){
@@ -138,7 +138,7 @@ layui.use(['table','element','layedit','layer'], function(){
    // 方法级渲染
   table.render({
     elem: '#demo',
-    url:'http://192.168.2.220:8080/constant/getAllConstants',
+    url:'http://192.168.2.177:8080/constant/getAllConstants',
     cellMinWidth: 80,
     showLoad:true,
      page: true,

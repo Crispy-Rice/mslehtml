@@ -43,7 +43,7 @@
 </script>
 		<script src="../layui/layui-v2.5.4/layui/layui.js" charset="utf-8"></script>
 		<script>
-			allUser("http://192.168.2.220:8080/staff/getAllStaffsOnjob");
+			allUser("http://192.168.2.177:8080/staff/getAllStaffsOnjob");
 			//根据id查询
 			var demoReload;
 			function select() {
@@ -51,13 +51,13 @@
 				if (demoReload == "") {
 					alert("接收单号不得为空！")
 				} else {
-					var url = "http://192.168.2.220:8080/staff/getPersonnelInformation?staffId=" + demoReload;
+					var url = "http://192.168.2.177:8080/staff/getPersonnelInformation?staffId=" + demoReload;
 					allUser(url);
 				}
 			}
 			// 刷新
 			function shuaxin() {
-				allUser("http://192.168.2.220:8080/staff/getAllStaffsOnjob");
+				allUser("http://192.168.2.177:8080/staff/getAllStaffsOnjob");
 			}
 			//查询全部
 			function allUser(url) {
@@ -159,7 +159,7 @@
 							layer.confirm('确认删除吗？', function(index) {
 								$.ajax({
 									type: 'DELETE',
-									url: "http://192.168.2.220:8080/tran/deleteCenterLoadById?loadingListId=" + obj.data.centerLoadId,
+									url: "http://192.168.2.177:8080/tran/deleteCenterLoadById?loadingListId=" + obj.data.centerLoadId,
 									dataType: "json",
 									success: function(result) {
 										history.go(0);
@@ -201,7 +201,7 @@
                 staffStrategyMonthly =formData.staffStrategyMonthly;
             $.ajax({
                 type: "post",  //数据提交方式（post/get）
-                url: "http://192.168.2.220:8080/constant/updateConstant",  //提交到的url
+                url: "http://192.168.2.177:8080/constant/updateConstant",  //提交到的url
                 data: {"staffId":staffId,"staffPosition":staffPosition,"staffStrategyRate":staffStrategyRate,"staffStrategyMetering":staffStrategyMetering,"staffStrategyMonthly":staffStrategyMonthly},//提交的数据
                 dataType: "json",//返回的数据类型格式
                 success: function(msg){

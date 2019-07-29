@@ -60,7 +60,7 @@
 <script src="../layui/layui-v2.5.4/layui/layui.js"></script> 
 
 <script>
-	/* allUser("http://192.168.2.220:8080/staff/getAllStaffsOnjob");
+	/* allUser("http://192.168.2.177:8080/staff/getAllStaffsOnjob");
 	//根据id查询
 	var demoReload;
 	
@@ -69,13 +69,13 @@
 		if (demoReload == "") {
 			alert("工号不得为空！")
 		} else {
-			var url = "http://192.168.2.220:8080/order/getThePickup?staffId=" + demoReload;
+			var url = "http://192.168.2.177:8080/order/getThePickup?staffId=" + demoReload;
 			allUser(url);
 		}
 	}
 	// 刷新
 	function shuaxin() {
-		allUser("http://192.168.2.220:8080/order/getAllStaffsOnjob");
+		allUser("http://192.168.2.177:8080/order/getAllStaffsOnjob");
 	}
 	
 	function allUser(url){ */
@@ -88,7 +88,7 @@ layui.use(['table','element'], function(){
    // 方法级渲染
   table.render({
     elem: '#demo',
-    url:"http://192.168.2.220:8080/order/getTheDelivery?staffId=1",
+    url:"http://192.168.2.177:8080/order/getTheDelivery?staffId=1",
     cellMinWidth: 80,
     showLoad:true,
      page: true,

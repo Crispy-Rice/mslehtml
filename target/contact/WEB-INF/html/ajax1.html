@@ -31,7 +31,7 @@
 				table.render({
 					elem: '#demo',
 					height: 500,
-					url: 'http://192.168.2.220:8080/staff/getAllStaffsOnjob' //数据接口
+					url: 'http://192.168.2.177:8080/staff/getAllStaffsOnjob' //数据接口
 						,
 					page: true //开启分页
 						,
@@ -94,7 +94,7 @@
 						var $ = layui.$;
 						$.ajax({
 							type: 'post',
-							url: "http://192.168.2.220:8080/staff/updateStaffSalary", // ajax请求路径  
+							url: "http://192.168.2.177:8080/staff/updateStaffSalary", // ajax请求路径
 							data: {
 								id:data.id,
                                 field:field,

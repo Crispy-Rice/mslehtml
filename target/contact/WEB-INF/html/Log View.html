@@ -26,7 +26,7 @@
 	<script src="../layui/layui-v2.5.4/layui/layui.js"></script>
 	
 	<script>
-		allUser("http://192.168.2.220:8080/log/getAllLog");
+		allUser("http://192.168.2.177:8080/log/getAllLog");
 		//根据接收单id查询
 		var demoReload;
 		
@@ -35,13 +35,13 @@
 			if (demoReload == "") {
 				alert("接收单号不得为空！")
 			} else {
-				var url = "http://192.168.2.220:8080/log/getLog?date=" + demoReload;
+				var url = "http://192.168.2.177:8080/log/getLog?date=" + demoReload;
 				allUser(url);
 			}
 		}
 		// 刷新
 		function shuaxin() {
-			allUser("http://192.168.2.220:8080/log/getAllLog");
+			allUser("http://192.168.2.177:8080/log/getAllLog");
 		}
 		
 		function allUser(url){
